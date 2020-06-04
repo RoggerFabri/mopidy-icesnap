@@ -26,8 +26,6 @@ RUN cd /tmp/ \
        && cd Iris \
        && python3 setup.py install
 
-RUN echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/Mopidy_Iris-3.44.0-py3.7.egg/mopidy_iris/system.sh" >> /etc/sudoers
-
 RUN apt-get purge --auto-remove -y \
        curl \
        gcc \
