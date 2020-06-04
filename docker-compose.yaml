@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  mopidy:
+    build:
+      context: mopidy/
+    command: mopidy
+    ports:
+     - 6601:6600
+     - 6681:6680
+    depends_on:
+      - icecast
+
+  icecast:
+    build:
+      context: icecast/
+    environment:
+      - ICECAST_SOURCE_PASSWORD=mopidy
+      - ICECAST_ADMIN_PASSWORD=mopidy
+      - ICECAST_PASSWORD=mopidy
+      - ICECAST_RELAY_PASSWORD=mopidy
+    ports:
+    - 8001:8000
