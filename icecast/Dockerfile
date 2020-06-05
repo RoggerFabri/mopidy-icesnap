@@ -1,5 +1,4 @@
-
-FROM debian:stretch
+FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 
