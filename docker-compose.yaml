@@ -2,19 +2,24 @@ version: "3"
 
 services:
 
-  mopidy:
+  mopidy-icecast:
     build:
       context: mopidy/
+    restart: always
     command: mopidy
     ports:
      - 6601:6600
      - 6681:6680
     depends_on:
       - icecast
+    volumes:
+      - ~/mopidy-icesnap/mopidy-icecast.conf:/mopidy_default.conf
+      - ~/mopidy-icecast-data/:/mopidy
 
   icecast:
     build:
       context: icecast/
+    restart: always
     environment:
       - ICECAST_SOURCE_PASSWORD=mopidy
       - ICECAST_ADMIN_PASSWORD=mopidy
@@ -22,3 +27,28 @@ services:
       - ICECAST_RELAY_PASSWORD=mopidy
     ports:
     - 8001:8000
+
+  mopidy-snapserver:
+    build:
+      context: mopidy/
+    restart: always
+    command: mopidy
+    ports:
+      - 6600:6600
+      - 6680:6680
+    depends_on:
+      - snapserver
+    volumes:
+      - ~/mopidy-icesnap/mopidy-snapserver.conf:/mopidy_default.conf
+      - ~/mopidy-snapserver-data/:/mopidy
+
+  snapserver:
+    build:
+      context: snapserver/
+    restart: always
+    command: snapserver
+    ports:
+      - 1704:1704
+      - 1705:1705
+      - 1780:1780
+      - 4953:4953
