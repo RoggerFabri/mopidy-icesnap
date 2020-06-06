@@ -18,7 +18,7 @@ services:
 
   snapserver:
     build:
-      context: snapserver/
+      context: .
     restart: always
     command: snapserver
     ports:
