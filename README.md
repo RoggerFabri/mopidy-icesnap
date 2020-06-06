@@ -16,8 +16,9 @@ Mopidy
 - Spotify
 
 Snapcast
-- Raspotify
-- `tcpclientsink` instead of fifo `tmp/snapfifo`
+- Streams
+    - [Mopidy] TCP stream using `tcpclientsink` instead of fifo `tmp/snapfifo`
+    - [Spotify] Spotify Connect stream from `librespot`
 
 Icecast
 
