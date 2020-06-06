@@ -15,6 +15,7 @@ services:
     volumes:
       - ~/mopidy-icesnap/mopidy-snapserver.conf:/mopidy_default.conf
       - ~/mopidy-snapserver-data/:/mopidy
+      - /tmp:/tmp
 
   snapserver:
     build:
@@ -22,3 +23,5 @@ services:
     restart: always
     command: snapserver
     network_mode: "host"
+    volumes:
+      - /tmp:/tmp
