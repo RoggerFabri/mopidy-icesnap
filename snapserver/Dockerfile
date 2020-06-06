@@ -6,22 +6,22 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG snapcast_version=0.19.0
 ARG target_arch=armhf
 
-RUN apt-get update \
-  && apt-get install -y wget ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y wget ca-certificates gnupg
+
 RUN wget https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb
 RUN dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
   ;  apt-get update \
-  && apt-get -f install -y \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get -f install -y
+
+RUN wget --no-check-certificate -qO - https://dtcooper.github.io/raspotify/key.asc | apt-key add -
+RUN echo 'deb https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list
+
+RUN apt-get update
+RUN apt-get -y install raspotify
 
 RUN /usr/bin/snapserver -v
 COPY snapserver.conf /etc/snapserver.conf
 COPY www/* /www/
-
-EXPOSE 1704
-EXPOSE 1705
-EXPOSE 1780
-EXPOSE 4953
 
 ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapserver"]

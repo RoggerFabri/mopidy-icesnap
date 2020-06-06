@@ -21,8 +21,4 @@ services:
       context: .
     restart: always
     command: snapserver
-    ports:
-      - 1704:1704
-      - 1705:1705
-      - 1780:1780
-      - 4953:4953
+    network_mode: "host"
