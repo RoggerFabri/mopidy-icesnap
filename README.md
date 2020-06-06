@@ -3,3 +3,8 @@
 ## Setup
 
 ### TODO
+
+
+SnapDotNet
+SnapDroid
+MPDCtrl for desktop
