@@ -17,7 +17,7 @@ Mopidy
 
 Snapcast
 - Raspotify
-- `tcpclientsink` instend of fifo `tmp/snapfifo`
+- `tcpclientsink` instead of fifo `tmp/snapfifo`
 
 Icecast
 
