@@ -4,7 +4,8 @@
 
 ### TODO
 
+Authentication: https://mopidy.com/ext/spotify/#authentication
 
-SnapDotNet
-SnapDroid
-MPDCtrl for desktop
+- SnapDotNet
+- SnapDroid
+- MPDCtrl for desktop
