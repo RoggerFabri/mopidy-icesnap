@@ -17,7 +17,5 @@ try:
         stream.set_callback(on_stream_update)
 
     loop.run_forever()
-except KeyboardInterrupt:
-    pass
-finally:
-    loop.close()
+except:
+    raise
