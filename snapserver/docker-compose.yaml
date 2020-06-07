@@ -2,6 +2,15 @@ version: "3"
 
 services:
 
+  snapserver:
+    build:
+      context: .
+    restart: always
+    command: snapserver
+    network_mode: "host"
+    volumes:
+      - /tmp:/tmp
+
   mopidy-snapserver:
     build:
       context: ../mopidy/
@@ -17,11 +26,11 @@ services:
       - ~/mopidy-snapserver-data/:/mopidy
       - /tmp:/tmp
 
-  snapserver:
+  stream-manager:
     build:
-      context: .
+      context: ../stream-manager/
+      args:
+        SNAPSERVER: <SNAPSERVER_IP>
     restart: always
-    command: snapserver
-    network_mode: "host"
-    volumes:
-      - /tmp:/tmp
+    depends_on:
+      - snapserver
