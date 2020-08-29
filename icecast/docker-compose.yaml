@@ -3,6 +3,7 @@ version: "3"
 services:
 
   mopidy-icecast:
+    container_name: mopidy-icecast
     build:
       context: ../mopidy/
     restart: always
@@ -17,6 +18,7 @@ services:
       - ~/mopidy-icecast-data/:/mopidy
 
   icecast:
+    container_name: icecast
     build:
       context: .
     restart: always
