@@ -5,7 +5,7 @@ services:
   snapserver:
     container_name: snapserver
     build:
-      context: .
+      context: snapserver/
       args:
         SPOTIFY_USERNAME: <SPOTIFY_USERNAME>
         SPOTIFY_PASSWORD: <SPOTIFY_PASSWORD>
@@ -18,7 +18,7 @@ services:
   mopidy-snapserver:
     container_name: mopidy-snapserver
     build:
-      context: ../mopidy/
+      context: mopidy/
     restart: always
     command: mopidy
     ports:
@@ -34,7 +34,7 @@ services:
   stream-manager:
     container_name: stream-manager
     build:
-      context: ../stream-manager/
+      context: stream-manager/
       args:
         SNAPSERVER: <SNAPSERVER_IP>
     restart: always
