@@ -46,7 +46,8 @@ RUN pip3 install \
     Mopidy-TuneIn \
     Mopidy-Spotify \
     Mopidy-Mobile \
-    Mopidy-Iris
+    Mopidy-Iris \
+    Mopidy-Scrobbler
 
 RUN mkdir -p /mopidy
 RUN touch /IS_CONTAINER

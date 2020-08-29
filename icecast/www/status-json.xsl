@@ -11,19 +11,20 @@
 				</xsl:if>
 			</xsl:for-each>
 
-			"streams": {
+			"streams": [
 				<xsl:for-each select="source">
-					"<xsl:value-of select="@mount" />": {
+					{
 						"name" : "<xsl:value-of select="server_name"/>",
 						"listeners" : "<xsl:value-of select="listeners" />",
 						"peak_listeners" : "<xsl:value-of select="listener_peak" />",
 						"description" : "<xsl:value-of select="server_description" />",
 						"title" : "<xsl:value-of select="title" />",
+						"album" : "<xsl:value-of select="album" />",
 						"genre" : "<xsl:value-of select="genre" />",
 						"url" : "<xsl:value-of select="server_url" />"
 					}<xsl:if test="position() != last()"><xsl:text>,</xsl:text></xsl:if>
 				</xsl:for-each>
-			}
+			]
 		}
 	}
 	</xsl:template>

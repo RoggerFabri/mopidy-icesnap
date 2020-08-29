@@ -3,6 +3,7 @@ version: "3"
 services:
 
   snapserver:
+    container_name: snapserver
     build:
       context: .
     restart: always
@@ -12,6 +13,7 @@ services:
       - /tmp:/tmp
 
   mopidy-snapserver:
+    container_name: mopidy-snapserver
     build:
       context: ../mopidy/
     restart: always
@@ -27,6 +29,7 @@ services:
       - /tmp:/tmp
 
   stream-manager:
+    container_name: stream-manager
     build:
       context: ../stream-manager/
       args:

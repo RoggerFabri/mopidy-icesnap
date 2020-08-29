@@ -4,20 +4,27 @@
 		margin: 0;
 		color: #444;
 		background-color: #eee;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-family: 'Fira Sans', sans-serif;
+	}
+
+	.album-cover {
+		height: 174px;
+		width: 174px;
+		margin: auto;
+		margin-bottom: 5px;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
 		color: #333;
 		line-height: 1.1;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-family: 'Fira Sans', sans-serif;
 		font-weight: normal;
 		margin: .125em 0 .25em;
 	}
 
 	.branding-title,
 	#site-title {
-		font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-family: 'Fira Sans', sans-serif;
 		font-weight: bold;
 	}
 
@@ -31,7 +38,7 @@
 		font-size: .875em;
 		color: #888;
 		color: rgba(17, 17, 17, .5);
-		font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-family: 'Fira Sans', sans-serif;
 		line-height: 1;
 	}
 
@@ -52,7 +59,6 @@
 
 	.mount-header span {
 		display: inline-block;
-		float: left;
 	}
 
 	.server-name {
@@ -112,7 +118,6 @@
 	}
 
 	#container {
-		padding: 0 1px 2em;
 		max-width: 40em;
 		margin: 0 auto;
 		text-align: center;
@@ -121,12 +126,7 @@
 	.mount-point {
 		font-size: .875em;
 		margin: 0 0 1em;
-		background-color: #FFF;
-		padding: 1em 1em 2em;
-
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
+		padding: 0 0 1em;
 	}
 
 	.listen span {
