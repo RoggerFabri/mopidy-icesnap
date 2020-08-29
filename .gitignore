@@ -1,5 +1,2 @@
 .DS_Store
 .vscode/**
-
-mopidy-snapserver.conf
-mopidy-icecast.conf

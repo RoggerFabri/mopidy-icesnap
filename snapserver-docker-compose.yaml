@@ -27,7 +27,7 @@ services:
     depends_on:
       - snapserver
     volumes:
-      - ~/mopidy-icesnap/mopidy-snapserver.conf:/mopidy_default.conf
+      - ~/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy_default.conf
       - ~/mopidy-snapserver-data/:/mopidy
       - /tmp:/tmp
 

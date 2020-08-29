@@ -14,7 +14,7 @@ services:
     depends_on:
       - icecast
     volumes:
-      - ~/mopidy-icesnap/mopidy-icecast.conf:/mopidy_default.conf
+      - ~/mopidy-icesnap/mopidy/mopidy-icecast.conf:/mopidy_default.conf
       - ~/mopidy-icecast-data/:/mopidy
 
   icecast:
