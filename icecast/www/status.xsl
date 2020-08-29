@@ -13,7 +13,10 @@
 	<link rel="stylesheet" type="text/css" href="boilerplate.min.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="modernizr.min.js"></script>
-	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&amp;subset=latin,latin-ext&#8217;" rel="stylesheet" type="text/css" />
+	<script src="jquery.min.js"></script>
+	<script src="playingnow.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,500,600,700,800&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -25,35 +28,17 @@
 	</header>
 
 <xsl:for-each select="source">
-<xsl:choose>
-<xsl:when test="listeners">
-
 	<section class="mount-point">
 		<div class="mount-point-data">
-			<xsl:if test="server_name"><span class="server-name mount-header">Playing</span></xsl:if>
-		</div>
-
-		<div class="mount-point-data">
-			<xsl:if test="title">
-				<p class="current-song" title="Current Song"><xsl:if test="artist"><xsl:value-of select="artist" /> - </xsl:if><xsl:value-of select="title" /></p>
-			</xsl:if>
+			<div id="album-cover" style="display:none;" class="album-cover"></div>
+			<p id="playing-now" class="current-song" title="Playing Now">...</p>
 		</div>
 		<div>
 			<figure>
-				<audio controls="" src="{@mount}"></audio>
+				<audio autoplay="true" controls="" src="{@mount}"></audio>
 			</figure>
 		</div>
 	</section>
-
-</xsl:when>
-<xsl:otherwise>
-<section class="mount-point">
-	<header class="mount-point-header clearfix">
-		<h1><xsl:value-of select="@mount" /> - Not Connected</h1>
-	</header>
-</section>
-</xsl:otherwise>
-</xsl:choose>
 </xsl:for-each>
 
 </div>
