@@ -6,6 +6,9 @@ services:
     container_name: snapserver
     build:
       context: .
+      args:
+        SPOTIFY_USERNAME: <SPOTIFY_USERNAME>
+        SPOTIFY_PASSWORD: <SPOTIFY_PASSWORD>
     restart: always
     command: snapserver
     network_mode: "host"
