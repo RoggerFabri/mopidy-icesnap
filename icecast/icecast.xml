@@ -33,6 +33,7 @@
 
   <mount>
     <mount-name>/mopidy</mount-name>
+    <charset>UTF-8</charset>
     <fallback-mount>/silence.mp3</fallback-mount>
     <fallback-override>1</fallback-override>
   </mount>
