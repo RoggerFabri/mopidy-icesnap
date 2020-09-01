@@ -5,7 +5,7 @@ services:
   mopidy-icecast:
     container_name: mopidy-icecast
     build:
-      context: mopidy/
+      context: ../mopidy/
     restart: always
     command: mopidy
     ports:
@@ -20,7 +20,7 @@ services:
   icecast:
     container_name: icecast
     build:
-      context: icecast/
+      context: ../icecast/
     restart: always
     environment:
       - ICECAST_SOURCE_PASSWORD=mopidy
