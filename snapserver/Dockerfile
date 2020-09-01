@@ -23,11 +23,12 @@ RUN echo 'deb https://dtcooper.github.io/raspotify raspotify main' | tee /etc/ap
 RUN apt-get update
 RUN apt-get -y install raspotify
 
-RUN sed -i "s/SPOTIFY_USERNAME/${SPOTIFY_USERNAME}/g" snapserver.conf
-RUN sed -i "s/SPOTIFY_PASSWORD/${SPOTIFY_PASSWORD}/g" snapserver.conf
-
 RUN /usr/bin/snapserver -v
 COPY snapserver.conf /etc/snapserver.conf
+
+RUN sed -i "s/SPOTIFY_USERNAME/${SPOTIFY_USERNAME}/g" /etc/snapserver.conf
+RUN sed -i "s/SPOTIFY_PASSWORD/${SPOTIFY_PASSWORD}/g" /etc/snapserver.conf
+
 COPY www/* /www/
 
 ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapserver"]
