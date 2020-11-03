@@ -23,6 +23,8 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 - [scrobbler] - Last.fm scrobbler if you want to enable it, not mandatory;
 - [youtube] - Allows streaming audio from Youtube videos, not mandatory;
 
+---
+
 ## Mopidy with Snapcast
 
 `TODO`
