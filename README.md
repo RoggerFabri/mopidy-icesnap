@@ -5,7 +5,7 @@ This repository contains two setups:
 - [Mopidy](https://github.com/mopidy/mopidy) with audio streaming across a network using [Icecast](https://gitlab.xiph.org/xiph/icecast-server/);
 - [Mopidy](https://github.com/mopidy/mopidy) with synchronized multi-room audio streaming using [Snapcast](https://github.com/badaix/snapcast);
 
-Mopidy is a music server and handles streaming services such as TuneIn, Spotify, Local Files and is extensible to other services. [Iris](https://github.com/jaedb/Iris) is the frontend extension I chose for Mopidy because is responsive, user-friendly and beautifully designed.
+Mopidy is a music server and handles streaming services such as TuneIn, Spotify, Local Files and is extensible to other services. [Iris](https://github.com/jaedb/Iris) is the frontend extension chosen for Mopidy because is responsive, user-friendly and beautifully designed.
 
 ---
 
