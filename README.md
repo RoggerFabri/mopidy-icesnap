@@ -49,13 +49,14 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
     - [Mopidy] FIFO stream using `tmp/snapfifo`
     - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
 
+- Clients
+    - SnapDotNet
+    - SnapDroid
+    - MPDCtrl for desktop
+
 ## Stream Manager
 
 `TODO`
-
-- SnapDotNet
-- SnapDroid
-- MPDCtrl for desktop
 
 ## Icecast
 
