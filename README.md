@@ -31,6 +31,8 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 
 ## Mopidy
 
+`TODO`
+
 - Iris (frontend)
 - Mobile (frontend)
 - TuneIn
@@ -41,16 +43,20 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 
 ## Snapcast
 
+`TODO`
+
 - Streams
-    - [Mopidy] TCP stream using fifo `tmp/snapfifo`
-    - [Spotify] Spotify Connect stream from `librespot`
+    - [Mopidy] FIFO stream using `tmp/snapfifo`
+    - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
 
 ## Stream Manager
 
 `TODO`
 
-## Icecast
-
 - SnapDotNet
 - SnapDroid
 - MPDCtrl for desktop
+
+## Icecast
+
+`TODO`
