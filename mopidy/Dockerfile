@@ -49,10 +49,6 @@ RUN pip3 install \
     Mopidy-Iris \
     Mopidy-Scrobbler
 
-RUN pip3 install \
-    Mopidy-SomaFM \
-    Mopidy-YouTube
-
 RUN mkdir -p /mopidy
 RUN touch /IS_CONTAINER
 RUN useradd -ms /bin/bash mopidy

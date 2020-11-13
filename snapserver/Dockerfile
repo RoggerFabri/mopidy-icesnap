@@ -3,7 +3,7 @@ LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG snapcast_version=0.20.0
+ARG snapcast_version=0.22.0
 ARG target_arch=armhf
 
 ARG SPOTIFY_USERNAME

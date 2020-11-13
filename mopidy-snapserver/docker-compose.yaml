@@ -4,6 +4,7 @@ services:
 
   snapserver:
     container_name: snapserver
+    hostname: snapserver
     build:
       context: ../snapserver/
       args:
