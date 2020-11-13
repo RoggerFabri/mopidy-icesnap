@@ -6,9 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG snapcast_version=0.22.0
 ARG target_arch=armhf
 
-ARG SPOTIFY_USERNAME
-ARG SPOTIFY_PASSWORD
-
 RUN apt-get update && \
     apt-get install -y wget ca-certificates gnupg
 
@@ -20,14 +17,10 @@ RUN dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
 RUN wget --no-check-certificate -qO - https://dtcooper.github.io/raspotify/key.asc | apt-key add -
 RUN echo 'deb https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list
 
-RUN apt-get update
-RUN apt-get -y install raspotify
+RUN apt-get update && \
+    apt-get -y install raspotify
 
 RUN /usr/bin/snapserver -v
-COPY snapserver.conf /etc/snapserver.conf
-
-RUN sed -i "s/SPOTIFY_USERNAME/${SPOTIFY_USERNAME}/g" /etc/snapserver.conf
-RUN sed -i "s/SPOTIFY_PASSWORD/${SPOTIFY_PASSWORD}/g" /etc/snapserver.conf
 
 COPY www/* /www/
 
