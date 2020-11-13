@@ -1,26 +1,23 @@
 version: "3"
 
 services:
-
   snapserver:
     container_name: snapserver
-    hostname: snapserver
     build:
       context: ../snapserver/
-      args:
-        SPOTIFY_USERNAME: <SPOTIFY_USERNAME>
-        SPOTIFY_PASSWORD: <SPOTIFY_PASSWORD>
-    restart: always
+    restart: unless-stopped
     command: snapserver
     network_mode: "host"
     volumes:
+      - ~/snapserver/:/root/.config/snapserver/
+      - ~/snapserver/snapserver.conf:/etc/snapserver.conf
       - /tmp:/tmp
 
   mopidy-snapserver:
     container_name: mopidy-snapserver
     build:
       context: ../mopidy/
-    restart: always
+    restart: unless-stopped
     command: mopidy
     ports:
       - 6600:6600
@@ -36,8 +33,9 @@ services:
     container_name: stream-manager
     build:
       context: ../stream-manager/
-      args:
-        SNAPSERVER: <SNAPSERVER_IP>
-    restart: always
+    environment:
+      -  SNAPSERVER_IP=<SNAPSERVER_IP>
+      -  SNAPSERVER_PORT=<SNAPSERVER_PORT>
+    restart: unless-stopped
     depends_on:
       - snapserver
