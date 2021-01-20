@@ -2,8 +2,9 @@ FROM debian:buster-slim
 
 ARG snapcast_version=0.22.0
 ARG TARGETARCH
-ENV HOST snapserver
+ENV SERVER snapserver
 ENV DEVICE Headphones
+ENV CLIENT_ID snapclient
 
 RUN  apt-get update \
   && apt-get install -y wget ca-certificates \
@@ -14,5 +15,6 @@ RUN  dpkg -i snapclient_${snapcast_version}-1_$(echo $TARGETARCH | sed 's/arm/ar
   ;  apt-get update \
   && apt-get -f install -y \
   && rm -rf /var/lib/apt/lists/*
+
 RUN /usr/bin/snapclient -v
-ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapclient -h $HOST -s $DEVICE"]
+ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
