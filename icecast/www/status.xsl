@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0" >
+<xsl:stylesheet xmlns:xsl = "https://www.w3.org/1999/XSL/Transform" version = "1.0" >
 <xsl:output omit-xml-declaration="no" method="html" indent="yes" encoding="UTF-8" />
 <xsl:template match = "/icestats" >
 <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html></xsl:text>
@@ -15,7 +15,7 @@
 	<script src="modernizr.min.js"></script>
 	<script src="jquery.min.js"></script>
 	<script src="playingnow.js"></script>
-	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,500,600,700,800&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
 </head>
 
