@@ -64,4 +64,12 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 
 ## Raspberry Pi Docker Images
 
-`TODO`
+Raspberry Pi images can be found at:
+
+https://hub.docker.com/u/rfabri
+
+I try to update the images whenever there's a new release for the used componentes. At the moment I'm maintaining images for:
+
+- snapclient
+- mopidy
+- snapserver
