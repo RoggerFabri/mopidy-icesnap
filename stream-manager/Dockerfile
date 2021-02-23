@@ -1,6 +1,5 @@
 FROM python:slim
-
-ARG SNAPSERVER
+LABEL Author Rogger Fabri
 
 RUN pip install snapcast
 COPY stream_manager.py stream_manager.py
