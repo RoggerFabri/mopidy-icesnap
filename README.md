@@ -21,7 +21,6 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 
 - [spotify] - Authenticate here https://mopidy.com/ext/spotify/#authentication and paste in the `client_id` and `client_secret`;
 - [scrobbler] - Last.fm scrobbler if you want to enable it, not mandatory;
-- [youtube] - Allows streaming audio from Youtube videos, not mandatory;
 
 ---
 
