@@ -25,7 +25,7 @@ RUN apt-get update && apt-get -y install \
 
 RUN /usr/bin/snapserver -v
 
-COPY www/* /www/
+COPY www/ /www/
 
 EXPOSE 1704 1705 1780
 
