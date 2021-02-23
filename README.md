@@ -69,6 +69,7 @@ https://hub.docker.com/u/rfabri
 
 I try to update the images whenever there's a new release for the used componentes. At the moment I'm maintaining images for:
 
-- snapclient
 - mopidy
 - snapserver
+- snapclient
+- stream-manager
