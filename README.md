@@ -21,7 +21,6 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 
 - [spotify] - Authenticate here https://mopidy.com/ext/spotify/#authentication and paste in the `client_id` and `client_secret`;
 - [scrobbler] - Last.fm scrobbler if you want to enable it, not mandatory;
-- [youtube] - Allows streaming audio from Youtube videos, not mandatory;
 
 ---
 
@@ -70,6 +69,7 @@ https://hub.docker.com/u/rfabri
 
 I try to update the images whenever there's a new release for the used componentes. At the moment I'm maintaining images for:
 
-- snapclient
 - mopidy
 - snapserver
+- snapclient
+- stream-manager
