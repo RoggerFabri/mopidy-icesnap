@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns:xsl = "https://www.w3.org/1999/XSL/Transform" version = "1.0" >
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0" >
 <xsl:output omit-xml-declaration="no" method="html" indent="yes" encoding="UTF-8" />
 <xsl:template match = "/icestats" >
 <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html></xsl:text>
