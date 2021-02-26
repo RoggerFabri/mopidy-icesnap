@@ -5,7 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -qq -y update && \
     apt-get -qq -y install icecast2 python-setuptools sudo && \
-    apt-get clean
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN rm -rf /usr/share/icecast2/web/*
 
