@@ -3,7 +3,7 @@ LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG snapcast_version=0.23.0
+ARG snapcast_version=0.24.0
 ARG target_arch=armhf
 
 RUN apt-get update && apt-get install -y \
