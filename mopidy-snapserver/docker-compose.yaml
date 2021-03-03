@@ -1,13 +1,15 @@
-version: "3"
+version: "2.4"
 
 services:
   snapserver:
     container_name: snapserver
-    build:
-      context: ../snapserver/
+    image: rfabri/snapserver:latest
     restart: unless-stopped
     command: snapserver
-    network_mode: "host"
+    ports:
+      - 1704:1704
+      - 1705:1705
+      - 1780:1780
     volumes:
       - ~/snapserver/:/root/.config/snapserver/
       - ~/snapserver/snapserver.conf:/etc/snapserver.conf
@@ -15,8 +17,7 @@ services:
 
   mopidy-snapserver:
     container_name: mopidy-snapserver
-    build:
-      context: ../mopidy/
+    image: rfabri/mopidy:latest
     restart: unless-stopped
     command: mopidy
     ports:
@@ -26,13 +27,12 @@ services:
       - snapserver
     volumes:
       - ~/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy_default.conf
-      - ~/mopidy-snapserver-data/:/mopidy
+      - ~/mopidy-snapserver/:/mopidy
       - /tmp:/tmp
 
   stream-manager:
     container_name: stream-manager
-    build:
-      context: ../stream-manager/
+    image: rfabri/stream-manager:latest
     environment:
       -  SNAPSERVER_IP=<SNAPSERVER_IP>
       -  SNAPSERVER_PORT=<SNAPSERVER_PORT>

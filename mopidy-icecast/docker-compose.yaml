@@ -1,26 +1,9 @@
-version: "3"
+version: "2.4"
 
 services:
-
-  mopidy-icecast:
-    container_name: mopidy-icecast
-    build:
-      context: ../mopidy/
-    restart: unless-stopped
-    command: mopidy
-    ports:
-     - 6601:6600
-     - 6681:6680
-    depends_on:
-      - icecast
-    volumes:
-      - ~/mopidy-icesnap/mopidy/mopidy-icecast.conf:/mopidy_default.conf
-      - ~/mopidy-icecast-data/:/mopidy
-
   icecast:
     container_name: icecast
-    build:
-      context: ../icecast/
+    image: rfabri/icecast:latest
     restart: unless-stopped
     environment:
       - ICECAST_SOURCE_PASSWORD=mopidy
@@ -28,4 +11,18 @@ services:
       - ICECAST_PASSWORD=mopidy
       - ICECAST_RELAY_PASSWORD=mopidy
     ports:
-    - 8001:8000
+      - 8000:8000
+
+    mopidy-icecast:
+    container_name: mopidy-icecast
+    image: rfabri/mopidy:latest
+    restart: unless-stopped
+    command: mopidy
+    ports:
+      - 6601:6600
+      - 6681:6680
+    depends_on:
+      - icecast
+    volumes:
+      - ~/mopidy-icesnap/mopidy/mopidy-icecast.conf:/mopidy_default.conf
+      - ~/mopidy-icecast/:/mopidy
