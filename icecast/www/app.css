@@ -476,7 +476,7 @@ body {
     bottom: -5vh;
     left: -5vw;
     width: auto;
-    opacity: .2;
+    opacity: .15;
     max-width: none;
     z-index: -1;
 }
