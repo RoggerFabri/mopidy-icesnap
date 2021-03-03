@@ -9,7 +9,7 @@
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no"/>
 				<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-				<title>ICESNAP RadioMopidy</title>
+				<title>ICESNAP Radio</title>
 				<link rel="stylesheet" type="text/css" href="app.css" />
 				<script src="jquery.min.js"></script>
 				<script src="playingnow.js"></script>
