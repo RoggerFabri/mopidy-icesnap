@@ -18,7 +18,7 @@
 
 			<body>
 				<div id="container" class="modal modal--kiosk-mode">
-					<div id="sleeping" class="sleeping">
+					<div id="sleeping" class="sleeping" style="display:none">
 						<img src="./sleeping.gif"></img>
 					</div>
 					<xsl:for-each select="source">
