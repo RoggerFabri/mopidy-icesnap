@@ -13,10 +13,14 @@
 				<link rel="stylesheet" type="text/css" href="app.css" />
 				<script src="jquery.min.js"></script>
 				<script src="playingnow.js"></script>
+				<script src="base.js"></script>
 			</head>
 
 			<body>
 				<div id="container" class="modal modal--kiosk-mode">
+					<div id="sleeping" class="sleeping">
+						<img src="./sleeping.gif"></img>
+					</div>
 					<xsl:for-each select="source">
 						<div class="content">
 							<div class="thumbnail thumbnail--loaded background">
