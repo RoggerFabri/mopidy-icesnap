@@ -43,7 +43,7 @@
 								</div>
 								<div class="playback">
 									<figure>
-										<audio autoplay="true" controls="" preload="auto" src="{@mount}"></audio>
+										<audio id="player" autoplay="true" controls="" preload="auto" src="{@mount}"></audio>
 									</figure>
 								</div>
 							</div>
