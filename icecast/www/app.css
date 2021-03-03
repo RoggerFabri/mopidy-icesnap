@@ -476,12 +476,14 @@ body {
     bottom: -5vh;
     left: -5vw;
     width: auto;
-    opacity: .15;
+    opacity: .35;
     max-width: none;
     z-index: -1;
 }
 .modal--kiosk-mode .content .thumbnail.background .thumbnail__image {
     padding-bottom: 110vh;
+    filter: blur(100px);
+    -webkit-filter: blur(100px);
 }
 .modal--kiosk-mode .content .player {
     text-align: center;
@@ -522,7 +524,6 @@ body {
 }
 
 audio {
-    width: 200px;
     height: 25px;
 }
 
