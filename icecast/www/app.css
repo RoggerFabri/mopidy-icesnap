@@ -500,7 +500,6 @@ body {
     text-align: center;
     z-index: 2;
     position: relative;
-    cursor: pointer;
     width: 100%;
     flex-grow: 1;
     align-items: center;
