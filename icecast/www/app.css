@@ -522,7 +522,7 @@ body {
     max-width: 50vh;
 }
 .modal--kiosk-mode .content .player .track__info {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     padding-top: 20px;
     padding-bottom: 20px;
 }
