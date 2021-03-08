@@ -11,6 +11,6 @@
     "start_url": "/index.html",
     "display": "standalone",
     "categories": ["music"],
-    "description": "Snapcast web client",
+    "description": "Snapcast Web Client",
     "theme_color": "#455A64"
 }
