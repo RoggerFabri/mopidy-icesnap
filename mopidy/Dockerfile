@@ -62,3 +62,6 @@ EXPOSE 6680
 
 USER mopidy
 ENTRYPOINT ["/usr/local/bin/mopidy.sh"]
+
+HEALTHCHECK --interval=5s --timeout=2s --retries=20 \
+    CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:6680/ || exit 1
