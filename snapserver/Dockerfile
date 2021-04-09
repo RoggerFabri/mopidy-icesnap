@@ -9,7 +9,8 @@ ARG target_arch=armhf
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
-    gnupg
+    gnupg \
+    curl
 
 RUN wget https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb
 RUN dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
