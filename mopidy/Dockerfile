@@ -57,6 +57,7 @@ RUN sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/mop
 RUN sed -i 's+--config .*mopidy.conf+--config /mopidy/mopidy.conf+g' /usr/local/lib/python3.7/dist-packages/mopidy_iris/system.sh
 
 COPY mopidy.sh /usr/local/bin/mopidy.sh
+COPY mopidy_default.conf /mopidy_default.conf
 
 EXPOSE 6600
 EXPOSE 6680
