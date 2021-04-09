@@ -35,6 +35,7 @@ RUN apt-get update && \
     libxslt1-dev \
     libffi-dev \
     libz-dev \
+    curl \
     python3-setuptools \
     python3-spotify && \
     rm -rf /var/lib/apt/lists/*
