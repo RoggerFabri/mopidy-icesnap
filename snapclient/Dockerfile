@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 
-ARG snapcast_version=0.24.0
+ARG snapcast_version=0.25.0
 ARG TARGETARCH
 ENV SERVER snapserver
 ENV DEVICE Headphones
