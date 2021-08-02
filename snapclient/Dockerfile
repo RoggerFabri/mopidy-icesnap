@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG snapcast_version=0.25.0
-ARG TARGETARCH
+ARG TARGETARCH=armhf
 ENV SERVER snapserver
 ENV DEVICE Headphones
 ENV CLIENT_ID snapclient
