@@ -1,4 +1,7 @@
 FROM debian:buster-slim
+LABEL Author Rogger Fabri
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 ARG snapcast_version=0.25.0
 ARG target_arch=armhf
