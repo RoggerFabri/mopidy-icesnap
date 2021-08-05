@@ -11,7 +11,7 @@ Mopidy is a music server and handles streaming services such as TuneIn, Spotify,
 
 ## Mopidy with Icecast
 
-This setup streams music from a chosen source and stream it via an Icecast Server, making the stream accessible network wide or internet wide should you want to expose your server. Icecast doesn't synchronize the listeners/clients so, although this setup can be used to a multi-room scenario, it won't deliver the perfect setup. I use it to stream music for my private internet radio.
+This setup streams music from a chosen source and stream it via an Icecast Server, making the stream accessible network wide or internet wide should you want to expose your server. Icecast doesn't synchronize the listeners/clients so, although this setup can be used to a multi-room scenario, it won't deliver the perfect setup. A good use is to stream music for an internet radio.
 
 In this setup, Mopidy-Iris is controlled at: `http://<your-server-ip>:6681` and Icecast is streamed at: `http://<your-server-ip>:8001`. The Icecast container comes with a basic webpage with an audio player to play whatever Mopidy is streaming. See the `icecast/www` folder for details. 
 
