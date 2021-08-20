@@ -19,7 +19,7 @@ In this setup, Mopidy-Iris is controlled at: `http://<your-server-ip>:6681` and 
 
 The Mopidy configuration for this setup is fetched from the folder `mopidy-icesnap/mopidy/mopidy-icecast.conf`. The output doesn't need to be changed. Important sections here are:
 
-- [spotify] - Authenticate here https://mopidy.com/ext/spotify/#authentication and paste in the `client_id` and `client_secret`;
+- [spotify] - Authenticate here <https://mopidy.com/ext/spotify/#authentication> and paste in the `client_id` and `client_secret`;
 - [scrobbler] - Last.fm scrobbler if you want to enable it, not mandatory;
 
 ---
@@ -27,7 +27,7 @@ The Mopidy configuration for this setup is fetched from the folder `mopidy-icesn
 ## Mopidy with Snapcast
 
 This setup is perfect for a multi-room audio where the clients are synchronized to each other. As well the streaming can be controlled from a single source (Mopidy), while being accessible from various devices on a fantastic web client. The setup consists of a main streaming server with several clients in each room, for each room you'll need a host capable of running the `snapclient` docker image or, alternatively, you can use an old Android phone either installing Snapcast (<https://play.google.com/store/apps/details?id=de.badaix.snapcast>) or using the web interface from your Snapcast server. You'll also need one speaker for each client (oh really?).
-Once connected to the server, clients automatically syncronize the streaming. 
+Once connected to the server, clients automatically syncronize the streaming.
 
 ## Mopidy
 
@@ -43,8 +43,6 @@ Once connected to the server, clients automatically syncronize the streaming.
 
 ## Snapcast
 
-A dead simple python script that automatically switches to the active streaming queue on Snapserver. It's a simple automation to make a seamless streaming whenever you want to switch from Spotify Connect (Raspotify) to Mopidy and vice-versa without the hassle of choosing the streaming queues.
-
 - Streams
     - [Mopidy] FIFO stream using `tmp/snapfifo`
     - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
@@ -56,7 +54,7 @@ A dead simple python script that automatically switches to the active streaming 
 
 ## Stream Manager
 
-`TODO`
+A dead simple python script that automatically switches to the active streaming queue on Snapserver. It's a simple automation to make a seamless streaming whenever you want to switch from Spotify Connect (Raspotify) to Mopidy and vice-versa without the hassle of choosing the streaming queues.
 
 ## Icecast
 
