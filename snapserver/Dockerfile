@@ -32,5 +32,5 @@ EXPOSE 1704 1705 1780
 
 ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapserver"]
 
-HEALTHCHECK --interval=5s --timeout=2s --retries=20 \
+HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
     CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:1780/ || exit 1
