@@ -50,21 +50,14 @@ RUN pip3 install \
     Mopidy-Iris \
     Mopidy-Scrobbler
 
-RUN mkdir -p /mopidy
-RUN touch /IS_CONTAINER
-RUN useradd -ms /bin/bash mopidy
-RUN sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers'
-RUN sed -i 's+--config .*mopidy.conf+--config /mopidy/mopidy.conf+g' /usr/local/lib/python3.7/dist-packages/mopidy_iris/system.sh
-
-COPY mopidy.sh /usr/local/bin/mopidy.sh
+COPY mopidy.sh /mopidy.sh
 COPY mopidy_default.conf /mopidy_default.conf
 
 EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
 
-USER mopidy
-ENTRYPOINT ["/usr/local/bin/mopidy.sh"]
+ENTRYPOINT ["/mopidy.sh"]
 
 HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
     CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:6680/ || exit 1
