@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-20211011-slim
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
