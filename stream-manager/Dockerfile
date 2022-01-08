@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:slim-buster
 LABEL Author Rogger Fabri
 
 RUN pip install snapcast

@@ -1,4 +1,5 @@
-FROM debian:bullseye-slim
+FROM python:buster
+
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +11,13 @@ RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
     gnupg \
-    curl
+    curl \
+    build-essential \
+    libgirepository1.0-dev \
+    libdbus-glib-1-dev
+
+RUN python -m pip install --upgrade pip
+RUN pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python
 
 RUN wget https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb
 RUN dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
