@@ -48,9 +48,9 @@ Once connected to the server, clients automatically syncronize the streaming.
     - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
 
 - Clients
-    - SnapDotNet
-    - SnapDroid
-    - MPDCtrl for desktop
+    - [Snap.Net](https://github.com/stijnvdb88/Snap.Net)
+    - [snapdroid](https://github.com/badaix/snapdroid)
+    - [MPDCtrl](https://github.com/torum/MPDCtrl)
 
 ## Stream Manager
 
