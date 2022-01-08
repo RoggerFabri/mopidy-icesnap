@@ -14,6 +14,8 @@ services:
       - ~/snapserver/:/root/.config/snapserver/
       - ~/snapserver/snapserver.conf:/etc/snapserver.conf
       - /tmp:/tmp
+      - /var/run/avahi-daemon:/var/run/avahi-daemon
+      - /var/run/dbus:/var/run/dbus
 
   mopidy-snapserver:
     container_name: mopidy-snapserver

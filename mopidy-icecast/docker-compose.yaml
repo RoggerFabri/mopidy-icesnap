@@ -13,7 +13,7 @@ services:
     ports:
       - 8000:8000
 
-    mopidy-icecast:
+  mopidy-icecast:
     container_name: mopidy-icecast
     image: rfabri/mopidy:latest
     restart: unless-stopped
