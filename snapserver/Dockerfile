@@ -1,4 +1,4 @@
-FROM python:3.11.0a3-slim-bullseye
+FROM python:buster
 
 LABEL Author Rogger Fabri
 
