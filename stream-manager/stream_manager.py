@@ -22,7 +22,6 @@ if serverPort is None:
 try:
     print('Connecting to server...')
     server = loop.run_until_complete(snapcast.control.create_server(loop, serverIp, serverPort))
-    print('Connected, streams will be updated accordingly.')
 except Exception as e:
     print('Cannot connect to server, check settings and try again.')
     print(e)
