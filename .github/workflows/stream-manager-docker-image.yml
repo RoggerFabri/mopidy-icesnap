@@ -40,4 +40,8 @@ jobs:
         name: Build
         run: |
           cd stream-manager
-          docker build . # will run buildx
+          docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+      -
+        name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
