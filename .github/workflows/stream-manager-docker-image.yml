@@ -7,7 +7,7 @@ on:
     - 'stream-manager/**'
 
 jobs:
-  buildx:
+  build_push:
     runs-on: ubuntu-latest
     steps:
       -
