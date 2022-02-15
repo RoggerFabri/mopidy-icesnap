@@ -1,4 +1,4 @@
-name: ci
+name: stream-manager
 
 on: 
   workflow_dispatch:
