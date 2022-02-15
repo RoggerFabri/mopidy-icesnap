@@ -40,7 +40,7 @@ jobs:
         name: Build
         run: |
           cd stream-manager
-          docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          docker build . --platform linux/amd64,linux/arm -t ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
       -
         name: Push
         run: |
