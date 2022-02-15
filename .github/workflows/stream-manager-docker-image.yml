@@ -1,6 +1,7 @@
 name: ci
 
-on:
+on: 
+  workflow_dispatch:
   push:
     paths:
     - 'stream-manager/**'
