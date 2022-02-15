@@ -1,4 +1,4 @@
-FROM python:buster
+FROM python:bullseye
 
 LABEL Author Rogger Fabri
 
@@ -8,24 +8,22 @@ ARG snapcast_version=0.26.0
 ARG target_arch=armhf
 
 RUN apt-get update && apt-get install -y \
-    wget \
-    ca-certificates \
-    gnupg \
     curl \
     build-essential \
     libgirepository1.0-dev \
     libdbus-glib-1-dev
 
-RUN python -m pip install --upgrade pip
-RUN pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python
+RUN python -m pip install --upgrade pip \
+  && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python
 
-RUN wget https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb
-RUN dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
-  ;  apt-get update \
-  && apt-get -f install -y
+RUN curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
+  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
+  ; apt-get update && apt-get -f install -y \
+  && rm snapserver_${snapcast_version}-1_${target_arch}.deb
 
-RUN wget --no-check-certificate -qO - https://dtcooper.github.io/raspotify/key.asc | apt-key add -
-RUN echo 'deb https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list
+RUN curl -sSL https://dtcooper.github.io/raspotify/key.asc | tee /usr/share/keyrings/raspotify_key.asc  > /dev/null \
+  && chmod 644 /usr/share/keyrings/raspotify_key.asc \
+  && echo 'deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list
 
 RUN apt-get update && apt-get -y install \
     raspotify \
