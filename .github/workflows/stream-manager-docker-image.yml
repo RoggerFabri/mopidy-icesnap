@@ -18,9 +18,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}      
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+      # -
+      #   name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v1
       -
         name: Set up Docker Buildx
         id: buildx
@@ -34,7 +34,4 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           platforms: |
-            linux/amd64
-            linux/arm64
             linux/arm/v7
-            linux/arm/v6
