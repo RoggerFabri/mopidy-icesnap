@@ -1,4 +1,4 @@
-FROM python:3.11.0a3-slim-bullseye
+FROM python:slim-bullseye
 LABEL Author Rogger Fabri
 
 RUN pip install snapcast

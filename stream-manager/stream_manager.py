@@ -31,7 +31,7 @@ def on_stream_update(data):
     for stream in server.streams:
         if stream.status == 'playing':
             for group in server.groups:
-                asyncio.run_coroutine_threadsafe(group.set_stream(stream.identifier), loop)
+                group.set_stream(stream.identifier)
                 print(f'Currently Playing Stream: {stream.identifier}')
 
 try:
