@@ -7,27 +7,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG snapcast_version=0.26.0
 ARG target_arch=armhf
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt upgrade -y \
     curl \
     build-essential \
     libgirepository1.0-dev \
-    libdbus-glib-1-dev
-
-RUN python -m pip install --upgrade pip \
-  && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python
-
-RUN curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
-  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
+    libdbus-glib-1-dev \
+ && python -m pip install --upgrade pip \
+ && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python \
+ && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
+ && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
   ; apt-get update && apt-get -f install -y \
-  && rm snapserver_${snapcast_version}-1_${target_arch}.deb
-
-RUN curl -sSL https://dtcooper.github.io/raspotify/key.asc | tee /usr/share/keyrings/raspotify_key.asc  > /dev/null \
-  && chmod 644 /usr/share/keyrings/raspotify_key.asc \
-  && echo 'deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list
-
-RUN apt-get update && apt-get -y install \
+ && rm snapserver_${snapcast_version}-1_${target_arch}.deb \
+ && curl -sSL https://dtcooper.github.io/raspotify/key.asc | tee /usr/share/keyrings/raspotify_key.asc  > /dev/null \
+ && chmod 644 /usr/share/keyrings/raspotify_key.asc \
+ && echo 'deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list \
+ && apt update && apt -y install \
     raspotify \
-    && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
 RUN /usr/bin/snapserver -v
 
