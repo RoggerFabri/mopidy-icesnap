@@ -1,5 +1,4 @@
 FROM python:bullseye
-
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
