@@ -3,12 +3,12 @@ LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get -qq -y update && \
-    apt-get -qq -y install icecast2 python-setuptools sudo && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN rm -rf /usr/share/icecast2/web/*
+RUN apt update && apt upgrade -y \ 
+ && apt install -y \
+    icecast2 \
+    sudo \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /usr/share/icecast2/web/*
 
 COPY icecast.xml /etc/icecast2/icecast.xml
 COPY silence.mp3 /usr/share/icecast2/web/silence.mp3
