@@ -3,18 +3,15 @@ LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    wget \
-    ca-certificates \
-    gnupg && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add - && \
-    wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/buster.list
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN apt update && apt upgrade -y \ 
+ && apt install -y \
+    curl \
+    gnupg \
+ && rm -rf /var/lib/apt/lists/* \
+ && curl -L https://apt.mopidy.com/mopidy.gpg | apt-key add - \
+ && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
+ && apt update \
+ && apt install -y \
     tzdata \
     sudo \
     build-essential \
@@ -38,9 +35,8 @@ RUN apt-get update && \
     curl \
     python3-setuptools \
     python3-spotify && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install \
+    rm -rf /var/lib/apt/lists/* \
+ && pip3 install \
     Mopidy \
     Mopidy-MPD \
     Mopidy-Local \
