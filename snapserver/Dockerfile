@@ -1,5 +1,4 @@
 FROM python:bullseye
-
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -8,15 +7,15 @@ ARG snapcast_version=0.26.0
 ARG target_arch=armhf
 
 RUN apt update && apt upgrade -y \
-    curl \
     build-essential \
-    libgirepository1.0-dev \
+    curl \
     libdbus-glib-1-dev \
+    libgirepository1.0-dev \
  && python -m pip install --upgrade pip \
  && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
-  ; apt-get update && apt-get -f install -y \
+  ; apt update && apt -f install -y \
  && rm snapserver_${snapcast_version}-1_${target_arch}.deb \
  && curl -sSL https://dtcooper.github.io/raspotify/key.asc | tee /usr/share/keyrings/raspotify_key.asc  > /dev/null \
  && chmod 644 /usr/share/keyrings/raspotify_key.asc \

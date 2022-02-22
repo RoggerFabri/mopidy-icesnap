@@ -1,7 +1,7 @@
-FROM debian:11-slim
+FROM debian:bullseye-slim
 LABEL Author Rogger Fabri
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt upgrade -y \ 
  && apt install -y \

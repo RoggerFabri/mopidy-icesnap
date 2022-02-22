@@ -1,4 +1,4 @@
-FROM debian:11-slim
+FROM debian:bullseye-slim
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,39 +12,39 @@ RUN apt update && apt upgrade -y \
  && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
  && apt update \
  && apt install -y \
-    tzdata \
-    sudo \
     build-essential \
-    python3-dev \
-    python3-pip \
-    python3-gst-1.0 \
-    python3-wheel \
-    gir1.2-gstreamer-1.0 \
     gir1.2-gst-plugins-base-1.0 \
+    gir1.2-gstreamer-1.0 \
+    gstreamer1.0-libav \
+    gstreamer1.0-plugins-bad \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-ugly \
-    gstreamer1.0-plugins-bad \
-    gstreamer1.0-libav \
     gstreamer1.0-tools \
-    libspotify12 \
+    libffi-dev \
     libspotify-dev \
+    libspotify12 \
     libxml2-dev \
     libxslt1-dev \
-    libffi-dev \
     libz-dev \
-    curl \
+    python3-dev \
+    python3-gst-1.0 \
+    python3-pip \
     python3-setuptools \
-    python3-spotify && \
-    rm -rf /var/lib/apt/lists/* \
- && pip3 install \
+    python3-spotify \
+    python3-wheel \
+    sudo \
+    tzdata \
+ && rm -rf /var/lib/apt/lists/* \
+ && python3 -m pip install --upgrade pip \
+ && pip install \
     Mopidy \
-    Mopidy-MPD \
-    Mopidy-Local \
-    Mopidy-TuneIn \
-    Mopidy-Spotify \
-    Mopidy-Mobile \
     Mopidy-Iris \
-    Mopidy-Scrobbler
+    Mopidy-Local \
+    Mopidy-Mobile \
+    Mopidy-MPD \
+    Mopidy-Scrobbler \
+    Mopidy-Spotify \
+    Mopidy-TuneIn
 
 COPY mopidy.sh /mopidy.sh
 COPY mopidy_default.conf /mopidy_default.conf

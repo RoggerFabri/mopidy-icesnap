@@ -10,7 +10,8 @@ ARG snapcast_version=0.26.0
 ARG target_arch=armhf
 
 RUN apt update && apt upgrade -y \
- && apt install -y curl \
+ && apt install -y \
+    curl \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapclient_${snapcast_version}-1_${target_arch}.deb \
  && dpkg -i snapclient_${snapcast_version}-1_${target_arch}.deb \
  ;  apt update \
