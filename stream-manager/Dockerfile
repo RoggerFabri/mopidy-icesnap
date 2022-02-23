@@ -1,11 +1,13 @@
-FROM python:slim-bullseye
+FROM alpine:latest
 LABEL Author Rogger Fabri
 
-RUN apt update && apt upgrade -y \ 
- && python -m pip install --upgrade pip \
- && pip install snapcast \
- && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk upgrade \ 
+ && apk add \
+    python3 \
+    py3-pip \
+ && pip3 install --upgrade pip \
+ && pip3 install snapcast
 
 COPY stream_manager.py stream_manager.py
 
-CMD [ "python","-u","./stream_manager.py" ]
+CMD [ "python3","-u","./stream_manager.py" ]

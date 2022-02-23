@@ -9,14 +9,14 @@ asyncio.set_event_loop(loop)
 serverIp = os.environ.get('SNAPSERVER_IP')
 serverPort = os.environ.get('SNAPSERVER_PORT')
 
-print(f'Snapserver IP: {serverIp}')
-print(f'Snapserver Port: {serverPort}')
+print(f'SNAPSERVER_IP: {serverIp}')
+print(f'SNAPSERVER_PORT: {serverPort}')
 
 if serverIp is None:
-    print('Snapserver IP not provided, exiting...')
+    print('ENV|SNAPSERVER_IP not provided, exiting...')
     sys.exit()
 if serverPort is None:
-    print('Snapserver Port not provided, exiting...')
+    print('ENV|SNAPSERVER_PORT not provided, exiting...')
     sys.exit()
 
 try:
