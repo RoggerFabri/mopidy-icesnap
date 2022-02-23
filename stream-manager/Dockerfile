@@ -1,10 +1,13 @@
 FROM alpine:latest
 LABEL Author Rogger Fabri
 
+ENV SNAPSERVER_IP=127.0.0.1
+ENV SNAPSERVER_PORT=1780
+
 RUN apk update && apk upgrade \ 
  && apk add \
-    python3 \
     py3-pip \
+    python3 \
  && pip3 install --upgrade pip \
  && pip3 install snapcast
 
