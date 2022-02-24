@@ -4,8 +4,10 @@ LABEL Author Rogger Fabri
 ENV SNAPSERVER_IP=127.0.0.1
 ENV SNAPSERVER_PORT=1780
 
+ENV PIP_NO_CACHE_DIR=1
+
 RUN apk update && apk upgrade \ 
- && apk add \
+ && apk add --no-cache \
     py3-pip \
     python3 \
  && pip3 install --upgrade pip \
