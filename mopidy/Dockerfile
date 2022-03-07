@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bullseye-20220228-slim
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
