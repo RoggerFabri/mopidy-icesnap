@@ -2,6 +2,7 @@ FROM python:3.11.0a5-bullseye
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_NO_CACHE_DIR=1
 
 ARG snapcast_version=0.26.0
 ARG target_arch=armhf
@@ -22,7 +23,10 @@ RUN apt update && apt upgrade -y \
  && echo 'deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list \
  && apt update && apt -y install \
     raspotify \
- && rm -rf /var/lib/apt/lists/*
+ && apt purge --auto-remove -y \
+    gcc \
+ && apt clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
 
 RUN /usr/bin/snapserver -v
 

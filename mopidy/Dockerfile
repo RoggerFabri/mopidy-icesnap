@@ -2,6 +2,7 @@ FROM debian:bullseye-20220316-slim
 LABEL Author Rogger Fabri
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_NO_CACHE_DIR=1
 
 RUN apt update && apt upgrade -y \ 
  && apt install -y \
@@ -26,7 +27,7 @@ RUN apt update && apt upgrade -y \
  && apt purge --auto-remove -y \
     gcc \
  && apt clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
 
 EXPOSE 6600
 EXPOSE 6680

@@ -7,6 +7,7 @@ ENV CLIENT_ID=snapclient
 
 RUN apk update && apk upgrade \ 
  && apk add --no-cache \
-    snapcast
+    snapcast \
+ && rm -rf /var/cache/apk/* /root/.cache 
 
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
