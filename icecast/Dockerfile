@@ -7,8 +7,9 @@ RUN apt update && apt upgrade -y \
  && apt install -y \
     icecast2 \
     sudo \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /usr/share/icecast2/web/*
+ && rm -rf /usr/share/icecast2/web/* \
+ && apt clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
 
 COPY icecast.xml /etc/icecast2/icecast.xml
 COPY silence.mp3 /usr/share/icecast2/web/silence.mp3
