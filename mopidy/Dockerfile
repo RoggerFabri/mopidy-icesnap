@@ -28,8 +28,6 @@ RUN apt update && apt upgrade -y \
  && apt clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 
-COPY mopidy.sh /mopidy.sh
-
 EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
