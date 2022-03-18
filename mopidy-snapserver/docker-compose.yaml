@@ -25,10 +25,11 @@ services:
     ports:
       - 6600:6600
       - 6680:6680
+      - 5555:5555/udp
     depends_on:
       - snapserver
     volumes:
-      - ~/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy_default.conf
+      - ~/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy.conf
       - ~/mopidy-snapserver/:/mopidy
       - /tmp:/tmp
 
