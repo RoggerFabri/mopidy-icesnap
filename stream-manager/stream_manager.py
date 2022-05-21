@@ -37,7 +37,6 @@ def on_stream_update(data):
         if stream.status == 'playing':
             for group in server.groups:
                 loop.create_task(group.set_stream(stream.identifier))
-                logging.info(f'Currently Playing Stream: {stream.identifier}')
 
 try:
     for stream in server.streams:
