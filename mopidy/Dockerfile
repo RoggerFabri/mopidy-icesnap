@@ -1,10 +1,10 @@
 FROM debian:11-slim
-LABEL Author Rogger Fabri
+LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
 
-RUN apt update && apt upgrade -y \ 
+RUN apt update && apt upgrade -y \
  && apt install -y \
     curl \
     gnupg \

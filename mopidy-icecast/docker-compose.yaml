@@ -11,7 +11,7 @@ services:
       - ICECAST_PASSWORD=mopidy
       - ICECAST_RELAY_PASSWORD=mopidy
     ports:
-      - 8000:8000
+      - "8000:8000"
 
   mopidy-icecast:
     container_name: mopidy-icecast
@@ -19,8 +19,8 @@ services:
     restart: unless-stopped
     command: mopidy
     ports:
-      - 6601:6600
-      - 6681:6680
+      - "6601:6600"
+      - "6681:6680"
     depends_on:
       - icecast
     volumes:

@@ -1,9 +1,9 @@
 FROM debian:11-slim
-LABEL Author Rogger Fabri
+LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt upgrade -y \ 
+RUN apt update && apt upgrade -y \
  && apt install -y \
     icecast2 \
     sudo \

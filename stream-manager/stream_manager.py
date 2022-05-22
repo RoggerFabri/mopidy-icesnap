@@ -2,7 +2,6 @@ import os
 import asyncio
 import snapcast.control
 import sys
-import time
 import logging
 
 logging.basicConfig(
@@ -32,7 +31,7 @@ except Exception as e:
     logging.exception(e)
     sys.exit()
 
-def on_stream_update(data):
+def on_stream_update():
     for stream in server.streams:
         if stream.status == 'playing':
             for group in server.groups:

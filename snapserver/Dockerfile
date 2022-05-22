@@ -1,5 +1,5 @@
 FROM python:3.11.0a7-bullseye
-LABEL Author Rogger Fabri
+LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1

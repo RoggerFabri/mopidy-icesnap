@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     command: snapserver
     ports:
-      - 1704:1704
-      - 1705:1705
-      - 1780:1780
+      - "1704:1704"
+      - "1705:1705"
+      - "1780:1780"
     volumes:
       - ~/snapserver/:/root/.config/snapserver/
       - ~/snapserver/snapserver.conf:/etc/snapserver.conf
@@ -23,9 +23,9 @@ services:
     restart: unless-stopped
     command: mopidy
     ports:
-      - 6600:6600
-      - 6680:6680
-      - 5555:5555/udp
+      - "6600:6600"
+      - "6680:6680"
+      - "5555:5555/udp"
     depends_on:
       - snapserver
     volumes:
