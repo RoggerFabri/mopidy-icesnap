@@ -31,7 +31,7 @@ except Exception as e:
     logging.exception(e)
     sys.exit()
 
-def on_stream_update():
+def on_stream_update(data):
     for stream in server.streams:
         if stream.status == 'playing':
             for group in server.groups:
