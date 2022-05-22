@@ -54,7 +54,7 @@ Once connected to the server, clients automatically syncronize the streaming.
 
 ## Stream Manager
 
-A dead simple python script that automatically switches to the active streaming queue on Snapserver. It's a simple automation to make a seamless streaming whenever you want to switch from Spotify Connect (Raspotify) to Mopidy and vice-versa without the hassle of choosing the streaming queues.
+A simple python script that automatically switches to the active streaming queue on Snapserver. It's a simple automation to make a seamless streaming whenever you want to switch from Spotify Connect (Raspotify) to Mopidy and vice-versa without the hassle of choosing the streaming queues.
 
 ## Icecast
 
