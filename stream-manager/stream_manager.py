@@ -27,7 +27,6 @@ if serverPort is None:
     logging.error('ENV|SNAPSERVER_PORT not provided, exiting...')
     sys.exit()
 
-
 def check_snapserver():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = sock.connect_ex((serverIp, int(serverPort)))
