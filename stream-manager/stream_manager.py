@@ -33,9 +33,7 @@ def check_snapserver():
         socket.gethostbyname(serverIp)
         
         result = sock.connect_ex((serverIp, int(serverPort)))
-        if result == 0:
-            logging.info("[✔] Snapserver is up!")
-        else:
+        if result != 0:
             logging.error("[⚠] Snapserver is down!")
         sock.close()
     except socket.error:
