@@ -1,8 +1,8 @@
-import os
 import asyncio
+import logging
+import os
 import snapcast.control
 import sys
-import logging
 import socket
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -28,12 +28,18 @@ if serverPort is None:
 
 def check_snapserver():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex((serverIp, int(serverPort)))
-    if result == 0:
-        logging.info("[✔] Snapserver is up!")
-    else:
-        logging.error("[⚠] Snapserver is down!")
-    sock.close()
+
+    try:
+        socket.gethostbyname(serverIp)
+        
+        result = sock.connect_ex((serverIp, int(serverPort)))
+        if result == 0:
+            logging.info("[✔] Snapserver is up!")
+        else:
+            logging.error("[⚠] Snapserver is down!")
+        sock.close()
+    except socket.error:
+        logging.error("[⚠] Ip or hostname cannot be resolved")
 
 def on_stream_update(data):
     logging.info(f'Currently Playing Stream: {stream.identifier}')
