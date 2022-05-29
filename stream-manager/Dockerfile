@@ -11,6 +11,7 @@ RUN apk update && apk upgrade \
     python3 \
     tzdata \
  && pip3 install --upgrade pip \
+ && pip3 install apscheduler \
  && pip3 install snapcast \
  && rm -rf /var/cache/apk/* /root/.cache 
 

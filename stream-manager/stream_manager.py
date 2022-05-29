@@ -2,12 +2,17 @@ import os
 import asyncio
 import snapcast.control
 import sys
+import time
 import logging
+import socket
+from apscheduler.schedulers.background import BackgroundScheduler
 
 logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
+    format='[%(asctime)s] %(levelname)-8s [%(funcName)s:%(lineno)d] — %(message)s',
     level=logging.INFO,
     datefmt='%d-%m-%Y %H:%M:%S')
+
+logging.getLogger('apscheduler').setLevel(logging.ERROR)
 
 serverIp = os.environ.get('SNAPSERVER_IP')
 serverPort = os.environ.get('SNAPSERVER_PORT')
@@ -22,22 +27,37 @@ if serverPort is None:
     logging.error('ENV|SNAPSERVER_PORT not provided, exiting...')
     sys.exit()
 
-try:
-    logging.info('Connecting to server...')
-    loop = asyncio.get_event_loop()
-    server = loop.run_until_complete(snapcast.control.create_server(loop, serverIp, serverPort))
-except Exception as e:
-    logging.error('Cannot connect to server, check settings and try again.')
-    logging.exception(e)
-    sys.exit()
+
+def check_snapserver():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex((serverIp, int(serverPort)))
+    if result == 0:
+        logging.info("[✔] Snapserver is up!")
+    else:
+        logging.error("[⚠] Snapserver is down!")
+    sock.close()
 
 def on_stream_update(data):
     for stream in server.streams:
         if stream.status == 'playing':
             for group in server.groups:
                 loop.create_task(group.set_stream(stream.identifier))
+                logging.info(f'Currently Playing Stream: {stream.identifier}')
 
 try:
+    logging.info('Connecting to server...')
+    loop = asyncio.get_event_loop()
+    server = loop.run_until_complete(snapcast.control.create_server(loop, serverIp, serverPort, True))
+except Exception as e:
+    logging.error('Cannot connect to server, check settings and try again.')
+    logging.exception(e)
+    sys.exit()
+
+try:
+    sched = BackgroundScheduler()
+    sched.add_job(check_snapserver, 'interval', seconds=5)
+    sched.start()
+
     for stream in server.streams:
         stream.set_callback(on_stream_update)
 
@@ -45,4 +65,5 @@ try:
 except Exception as e:
     logging.error('Unhandled exception, check the logs for details.')
     logging.exception(e)
+    sched.shutdown()
     sys.exit()
