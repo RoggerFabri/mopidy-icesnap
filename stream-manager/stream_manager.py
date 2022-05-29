@@ -2,7 +2,6 @@ import os
 import asyncio
 import snapcast.control
 import sys
-import time
 import logging
 import socket
 from apscheduler.schedulers.background import BackgroundScheduler
