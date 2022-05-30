@@ -31,7 +31,7 @@ def check_snapserver():
 
     try:
         socket.gethostbyname(serverIp)
-        
+
         result = sock.connect_ex((serverIp, int(serverPort)))
         if result != 0:
             logging.error("[⚠] Snapserver is down!")
@@ -40,11 +40,10 @@ def check_snapserver():
         logging.error("[⚠] Ip or hostname cannot be resolved")
 
 def on_stream_update(data):
-    logging.info(f'Currently Playing Stream: {stream.identifier}')
-    for stream in server.streams:
-            if stream.status == 'playing':
-                for group in server.groups:
-                    loop.create_task(group.set_stream(stream.identifier))
+    for server_stream in server.streams:
+        if server_stream.status == 'playing':
+            for group in server.groups:
+                loop.create_task(group.set_stream(server_stream.identifier))
 
 try:
     logging.info('Connecting to server...')
@@ -56,9 +55,9 @@ except Exception as e:
     sys.exit()
 
 try:
-    sched = BackgroundScheduler()
-    sched.add_job(check_snapserver, 'interval', seconds=5)
-    sched.start()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(check_snapserver, 'interval', seconds=5)
+    scheduler.start()
 
     for stream in server.streams:
         stream.set_callback(on_stream_update)
@@ -67,5 +66,4 @@ try:
 except Exception as e:
     logging.error('Unhandled exception, check the logs for details.')
     logging.exception(e)
-    sched.shutdown()
     sys.exit()
