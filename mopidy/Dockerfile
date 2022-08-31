@@ -15,7 +15,6 @@ RUN apt update && apt upgrade -y \
  && apt install -y \
     mopidy \
     python3-pip \
-    python3-spotify \
  && pip install \
     Mopidy-Iris \
     Mopidy-Local \
