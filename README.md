@@ -66,4 +66,5 @@ Raspberry Pi images can be found at:
 
 <https://hub.docker.com/u/rfabri>
 
-I try to update the images whenever there's a new release for the used components.
+Whilst arm32v7 images exists they're no longer maintained. All images are now being build into arm64v8. Time to move on.
+Motivated by <https://www.linuxserver.io/blog/end-of-an-arch>.
