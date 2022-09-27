@@ -1,19 +1,21 @@
 name: ado-stream-manager
 
-on: 
+on:
   workflow_dispatch:
   push:
+    branches:
+      - "master"
     paths:
-    - 'stream-manager/**'
+      - "stream-manager/**"
 
 jobs:
-    build:
-        name: Call Azure Pipeline
-        runs-on: ubuntu-latest
-        steps:
-        - name: Azure Pipelines Action
-          uses: Azure/pipelines@v1
-          with:
-            azure-devops-project-url: https://dev.azure.com/${{ secrets.AZURE_DEVOPS_ORG }}/${{ secrets.AZURE_DEVOPS_PROJECT }}
-            azure-pipeline-name: 'stream-manager [docker-image]'
-            azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+  build:
+    name: Call Azure Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1
+        with:
+          azure-devops-project-url: https://dev.azure.com/${{ secrets.AZURE_DEVOPS_ORG }}/${{ secrets.AZURE_DEVOPS_PROJECT }}
+          azure-pipeline-name: "stream-manager [docker-image]"
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}

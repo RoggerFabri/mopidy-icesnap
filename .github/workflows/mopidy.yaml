@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - "master"
     paths:
-    - 'mopidy/**'
+      - "mopidy/**"
 
 jobs:
   docker:
