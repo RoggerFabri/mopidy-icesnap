@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          file: icecast/Dockerfile
+          context: icecast
           tags: rfabri/icecast:amd64-latest

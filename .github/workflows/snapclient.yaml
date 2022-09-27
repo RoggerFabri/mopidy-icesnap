@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          file: snapclient/Dockerfile
+          context: snapclient
           tags: rfabri/snapclient:amd64-latest

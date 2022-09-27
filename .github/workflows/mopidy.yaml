@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          file: mopidy/Dockerfile
+          context: mopidy
           tags: rfabri/mopidy:amd64-latest
