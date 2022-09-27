@@ -15,6 +15,7 @@ RUN apt update && apt upgrade -y \
  && python -m pip install --upgrade pip \
  && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
+ && dpkg --add-architecture armhf \
  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
   ; apt update && apt -f install -y \
  && rm snapserver_${snapcast_version}-1_${target_arch}.deb \
