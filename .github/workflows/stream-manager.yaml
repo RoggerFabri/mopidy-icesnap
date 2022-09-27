@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: stream-manager
+          context: ./stream-manager
           tags: rfabri/stream-manager:amd64-latest
