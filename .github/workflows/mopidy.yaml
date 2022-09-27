@@ -24,4 +24,4 @@ jobs:
         with:
           push: true
           file: mopidy/Dockerfile
-          tags: rfabri/mopidy-amd64:latest
+          tags: rfabri/mopidy:amd64-latest
