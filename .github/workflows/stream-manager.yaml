@@ -24,4 +24,5 @@ jobs:
         with:
           push: true
           context: ./stream-manager
+          file: stream-manager/Dockerfile
           tags: rfabri/stream-manager:amd64-latest
