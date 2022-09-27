@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: snapclient
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapclient"
           tags: rfabri/snapclient:amd64-latest

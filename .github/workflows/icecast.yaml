@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: icecast
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:icecast"
           tags: rfabri/icecast:amd64-latest
