@@ -44,13 +44,14 @@ Once connected to the server, clients automatically syncronize the streaming.
 ## Snapcast
 
 - Streams
-    - [Mopidy] FIFO stream using `tmp/snapfifo`
-    - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
+
+  - [Mopidy] FIFO stream using `tmp/snapfifo`
+  - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
 
 - Clients
-    - [Snap.Net](https://github.com/stijnvdb88/Snap.Net)
-    - [snapdroid](https://github.com/badaix/snapdroid)
-    - [MPDCtrl](https://github.com/torum/MPDCtrl)
+  - [Snap.Net](https://github.com/stijnvdb88/Snap.Net)
+  - [snapdroid](https://github.com/badaix/snapdroid)
+  - [MPDCtrl](https://github.com/torum/MPDCtrl)
 
 ## Stream Manager
 
@@ -60,11 +61,20 @@ A simple python script that automatically switches to the active streaming queue
 
 `TODO`
 
-## Raspberry Pi Docker Images
+## Docker Images
 
-Raspberry Pi images can be found at:
+Docker images can be found at:
 
 <https://hub.docker.com/u/rfabri>
 
-Whilst arm32v7 images exists they're no longer maintained. All images are now being build into arm64v8. Time to move on.
+### Supported Architectures
+
+The architectures supported by the images on this repository are:
+
+| Architecture | Available | Tag             |
+| :----------: | :-------: | --------------- |
+|    x86-64    |    ✅     | amd64-latest   |
+|    arm64     |    ✅     | arm64v8-latest |
+
+:information_source: Whilst `arm32v7` (armhf) images exists they're no longer maintained. All `arm` images are now being build into `arm64v8`. Time to move on.
 Motivated by <https://www.linuxserver.io/blog/end-of-an-arch>.
