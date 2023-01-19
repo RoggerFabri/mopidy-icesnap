@@ -1,4 +1,4 @@
-FROM python:3.11.0rc1-bullseye
+FROM python:3.12.0a2-bullseye
 LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
