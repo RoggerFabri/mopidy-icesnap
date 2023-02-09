@@ -1,19 +1,15 @@
-FROM python:latest
+FROM debian:11-slim
 LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
 
-ARG snapcast_version=0.26.0
+ARG snapcast_version=0.27.0
 ARG target_arch=armhf
 
 RUN apt update && apt upgrade -y \
     build-essential \
     curl \
-    libdbus-glib-1-dev \
-    libgirepository1.0-dev \
- && python -m pip install --upgrade pip \
- && pip install python-mpd2 musicbrainzngs pydbus PyGObject dbus-python \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
  && dpkg --add-architecture armhf \
  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
@@ -30,8 +26,6 @@ RUN apt update && apt upgrade -y \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
 
 RUN /usr/bin/snapserver -v
-
-COPY www/ /www/
 
 EXPOSE 1704 1705 1780
 
