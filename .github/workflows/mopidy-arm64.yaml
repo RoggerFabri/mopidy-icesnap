@@ -1,4 +1,4 @@
-name: mopidy
+name: mopidy-arm64
 
 on:
   workflow_dispatch:
