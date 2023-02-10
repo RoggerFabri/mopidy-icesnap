@@ -1,4 +1,4 @@
-name: stream-manager
+name: stream-manager-amd64
 
 on:
   workflow_dispatch:
