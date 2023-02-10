@@ -1,4 +1,4 @@
-name: snapserver
+name: icecast-amd64
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - "master"
     paths:
-      - "snapserver/**"
+      - "icecast/**"
 
 jobs:
   docker:
@@ -23,7 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapserver"
-          tags: rfabri/snapserver:amd64-latest
-          build-args: |
-            target_arch=amd64
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:icecast"
+          tags: ${{ secrets.DOCKERHUB_SLUG }}/icecast:amd64-latest

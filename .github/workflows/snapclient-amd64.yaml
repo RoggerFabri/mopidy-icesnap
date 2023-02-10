@@ -1,4 +1,4 @@
-name: mopidy
+name: snapclient-amd64
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - "master"
     paths:
-      - "mopidy/**"
+      - "snapclient/**"
 
 jobs:
   docker:
@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:mopidy"
-          tags: rfabri/mopidy:amd64-latest
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapclient"
+          tags: ${{ secrets.DOCKERHUB_SLUG }}/snapclient:amd64-latest

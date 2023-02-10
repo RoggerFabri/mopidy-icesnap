@@ -1,4 +1,4 @@
-name: icecast
+name: mopidy-amd64
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - "master"
     paths:
-      - "icecast/**"
+      - "mopidy/**"
 
 jobs:
   docker:
@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:icecast"
-          tags: rfabri/icecast:amd64-latest
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:mopidy"
+          tags: ${{ secrets.DOCKERHUB_SLUG }}/mopidy:amd64-latest

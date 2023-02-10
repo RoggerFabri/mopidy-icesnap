@@ -1,4 +1,4 @@
-name: ado-mopidy
+name: snapclient-arm64
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - "master"
     paths:
-      - "mopidy/**"
+      - "snapclient/**"
 
 jobs:
   build:
@@ -17,5 +17,5 @@ jobs:
         uses: Azure/pipelines@v1
         with:
           azure-devops-project-url: https://dev.azure.com/${{ secrets.AZURE_DEVOPS_ORG }}/${{ secrets.AZURE_DEVOPS_PROJECT }}
-          azure-pipeline-name: "mopidy [docker-image]"
+          azure-pipeline-name: "snapclient [docker-image]"
           azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}

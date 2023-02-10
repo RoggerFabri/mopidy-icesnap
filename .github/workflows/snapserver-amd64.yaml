@@ -1,4 +1,4 @@
-name: snapclient
+name: snapserver-amd64
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - "master"
     paths:
-      - "snapclient/**"
+      - "snapserver/**"
 
 jobs:
   docker:
@@ -23,5 +23,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapclient"
-          tags: rfabri/snapclient:amd64-latest
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapserver"
+          tags: ${{ secrets.DOCKERHUB_SLUG }}/snapserver:amd64-latest
+          build-args: |
+            target_arch=amd64

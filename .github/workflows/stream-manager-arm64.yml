@@ -1,4 +1,4 @@
-name: ado-stream-manager
+name: stream-manager-arm64
 
 on:
   workflow_dispatch:
