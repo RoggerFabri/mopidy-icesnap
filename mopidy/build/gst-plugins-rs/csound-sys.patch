@@ -1,0 +1,17 @@
+---
+ Cargo.toml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Cargo.toml b/Cargo.toml
+index a8c1492..bc30b3b 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -34,3 +34,6 @@ panic = 'unwind'
+ 
+ [profile.dev]
+ opt-level = 1
++
++[patch.crates-io]
++csound-sys = { git = "https://github.com/GnaphronG/csound-rs", tag="csound-sys-v0.1.2" }
+-- 
+2.30.0
