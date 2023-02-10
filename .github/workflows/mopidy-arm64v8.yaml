@@ -1,4 +1,4 @@
-name: mopidy-arm64
+name: mopidy-arm64v8
 
 on:
   workflow_dispatch:
@@ -43,4 +43,4 @@ jobs:
           platforms: linux/arm64
           push: true
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:mopidy"
-          tags: ${{ secrets.DOCKERHUB_SLUG }}/mopidy:arm64-latest
+          tags: ${{ secrets.DOCKERHUB_SLUG }}/mopidy:arm64v8-latest

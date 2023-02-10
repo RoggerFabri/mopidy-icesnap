@@ -1,4 +1,4 @@
-name: mopidy-arm64-old
+name: mopidy-arm64v8-old
 
 on:
   workflow_dispatch:
