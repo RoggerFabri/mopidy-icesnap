@@ -1,12 +1,12 @@
-name: mopidy-arm64v8-old
+name: mopidy-arm64v8
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - "master"
-  #   paths:
-  #     - "mopidy/**"
+  push:
+    branches:
+      - "master"
+    paths:
+      - "mopidy/**"
 
 jobs:
   build:
