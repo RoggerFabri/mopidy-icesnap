@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "icecast/**"
+  schedule:
+    - cron: '0 5 * * *'
 
 jobs:
   build:

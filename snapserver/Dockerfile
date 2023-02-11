@@ -8,7 +8,6 @@ ARG snapcast_version=0.27.0
 ARG target_arch=armhf
 
 RUN apt update && apt upgrade -y \
-    build-essential \
     curl \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}.deb \
  && dpkg --add-architecture armhf \
