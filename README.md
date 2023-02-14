@@ -1,4 +1,4 @@
-# Mopidy with Icecast / Snapcast on Docker containers
+# Mopidy with Icecast / Snapcast on Docker Containers
 
 This repository contains two setups:
 
@@ -31,7 +31,9 @@ Once connected to the server, clients automatically syncronize the streaming.
 
 ## Mopidy
 
-`TODO`
+Mopidy is a music server with support for MPD clients and HTTP clients.
+
+Includes the following extensions:
 
 - Iris (frontend)
 - Mobile (frontend)
@@ -43,8 +45,9 @@ Once connected to the server, clients automatically syncronize the streaming.
 
 ## Snapcast
 
-- Streams
+Snapcast is a multiroom client-server audio player, where all clients are time synchronized with the server to play perfectly synced audio. This version comes with [Raspotify](https://github.com/dtcooper/raspotify) baked in.
 
+- Streams
   - [Mopidy] FIFO stream using `tmp/snapfifo`
   - [Spotify] Spotify Connect stream from `librespot` (Raspotify)
 
@@ -59,7 +62,7 @@ A simple python script that automatically switches to the active streaming queue
 
 ## Icecast
 
-`TODO`
+Icecast is a server — an audio streaming server to be precise.
 
 ## Docker Images
 
@@ -75,6 +78,3 @@ The architectures supported by the images on this repository are:
 | :----------: | :-------: | --------------- |
 |    x86-64    |    ✅     | amd64-latest   |
 |    arm64     |    ✅     | arm64v8-latest |
-
-:information_source: Whilst `arm32v7` (armhf) images exists they're no longer maintained. All `arm` images are now being build into `arm64v8`. Time to move on.
-Motivated by <https://www.linuxserver.io/blog/end-of-an-arch>.
