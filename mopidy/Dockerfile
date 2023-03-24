@@ -8,9 +8,7 @@ RUN apt update && apt upgrade -y \
  && apt install -y \
     curl \
     gnupg \
- && mkdir -p /usr/local/share/keyrings \
- && curl -sSL https://apt.mopidy.com/mopidy.gpg -o /usr/local/share/keyrings/mopidy-archive-keyring.gpg \
- && curl -sSL https://apt.mopidy.com/buster.list -o /etc/apt/sources.list.d/mopidy.list \
+ && echo 'deb [trusted=yes] https://apt.mopidy.com/ bullseye main contrib non-free' > /etc/apt/sources.list.d/mopidy.list \
  && apt update \
  && apt install -y \
     mopidy \
