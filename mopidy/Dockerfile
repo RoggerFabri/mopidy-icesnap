@@ -6,6 +6,7 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
+    git \
     curl \
     gnupg \
  && echo 'deb [trusted=yes] https://apt.mopidy.com/ bullseye main contrib non-free' > /etc/apt/sources.list.d/mopidy.list \
@@ -21,6 +22,7 @@ RUN apt update && apt upgrade -y \
     Mopidy-Scrobbler \
   # Mopidy-Spotify \
     Mopidy-TuneIn \
+    pip install git+https://github.com/mopidy/mopidy-spotify \
  && apt purge --auto-remove -y \
     gcc \
  && apt clean \
