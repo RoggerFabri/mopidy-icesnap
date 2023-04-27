@@ -6,6 +6,7 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
+    mopidy \
     python3-pip \
  && pip install \
     Mopidy-Iris \
@@ -14,9 +15,7 @@ RUN apt update && apt upgrade -y \
     Mopidy-MPD \
     Mopidy-Scrobbler \
   # Mopidy-Spotify \
-    Mopidy-TuneIn 
-
-RUN apt install -y mopidy \
+    Mopidy-TuneIn \
  && apt purge --auto-remove -y \
     gcc \
  && apt clean \
