@@ -6,11 +6,6 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
-    curl \
-    gnupg \
- && echo 'deb [trusted=yes] https://apt.mopidy.com/ bullseye main contrib non-free' > /etc/apt/sources.list.d/mopidy.list \
- && apt update \
- && apt install -y \
     mopidy \
     python3-pip \
  && pip install \
