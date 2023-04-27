@@ -21,7 +21,6 @@ services:
     container_name: mopidy-snapserver
     image: rfabri/mopidy:latest
     restart: unless-stopped
-    command: mopidy
     ports:
       - "6600:6600"
       - "6680:6680"

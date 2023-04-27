@@ -17,7 +17,6 @@ services:
     container_name: mopidy-icecast
     image: rfabri/mopidy:latest
     restart: unless-stopped
-    command: mopidy
     ports:
       - "6601:6600"
       - "6681:6680"
