@@ -12,6 +12,6 @@ RUN apk update && apk upgrade \
     tzdata \
  && rm -rf /var/cache/apk/* /root/.cache
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+ENTRYPOINT ["dumb-init", "--"]
 
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
