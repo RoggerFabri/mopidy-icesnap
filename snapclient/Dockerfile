@@ -7,8 +7,11 @@ ENV CLIENT_ID=snapclient
 
 RUN apk update && apk upgrade \
  && apk add --no-cache \
+    dumb-init \
     snapcast \
     tzdata \
  && rm -rf /var/cache/apk/* /root/.cache
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
