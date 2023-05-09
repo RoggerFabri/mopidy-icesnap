@@ -7,6 +7,7 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN apk update && apk upgrade \
  && apk add --no-cache \
+    dumb-init \
     py3-pip \
     python3 \
     tzdata \
@@ -17,4 +18,5 @@ RUN apk update && apk upgrade \
 
 COPY stream_manager.py stream_manager.py
 
+ENTRYPOINT ["dumb-init", "--"]
 CMD [ "python3","-u","./stream_manager.py" ]
