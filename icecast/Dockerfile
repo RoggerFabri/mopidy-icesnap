@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
+    dumb-init \
     icecast2 \
     sudo \
  && rm -rf /usr/share/icecast2/web/* \
@@ -23,4 +24,5 @@ ADD ./start.sh /start.sh
 
 EXPOSE 8000
 
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["/start.sh"]
