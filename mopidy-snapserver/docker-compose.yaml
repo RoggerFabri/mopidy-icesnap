@@ -3,7 +3,7 @@ version: "2.4"
 services:
   snapserver:
     container_name: snapserver
-    image: rfabri/snapserver:latest
+    image: rfabri/snapserver:amd64-latest
     restart: unless-stopped
     command: snapserver
     ports:
@@ -19,7 +19,7 @@ services:
 
   mopidy-snapserver:
     container_name: mopidy-snapserver
-    image: rfabri/mopidy:latest
+    image: rfabri/mopidy:amd64-latest
     restart: unless-stopped
     ports:
       - "6600:6600"
@@ -34,7 +34,7 @@ services:
 
   stream-manager:
     container_name: stream-manager
-    image: rfabri/stream-manager:latest
+    image: rfabri/stream-manager:amd64-latest
     environment:
       -  SNAPSERVER_IP=<SNAPSERVER_IP>
       -  SNAPSERVER_PORT=<SNAPSERVER_PORT>
