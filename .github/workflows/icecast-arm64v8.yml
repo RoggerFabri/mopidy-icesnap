@@ -3,6 +3,8 @@ name: icecast-arm64v8
 on:
   workflow_dispatch:
   push:
+    branches:
+      - "master"
     paths:
       - "icecast/**"
   schedule:
