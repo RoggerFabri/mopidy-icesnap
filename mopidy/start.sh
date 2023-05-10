@@ -4,4 +4,4 @@ env
 
 set -x
 
-mopidy --config /mopidy.conf
+mopidy --config /mopidy/mopidy.conf
