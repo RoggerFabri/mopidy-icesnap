@@ -13,5 +13,4 @@ RUN apk update && apk upgrade \
  && rm -rf /var/cache/apk/* /root/.cache
 
 ENTRYPOINT ["dumb-init", "--"]
-
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]

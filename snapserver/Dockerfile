@@ -29,7 +29,6 @@ RUN /usr/bin/snapserver -v
 EXPOSE 1704 1705 1780
 
 ENTRYPOINT ["dumb-init", "--"]
-
 CMD ["bash","-c","snapserver"]
 
 HEALTHCHECK --interval=60s --timeout=5s --retries=3 \

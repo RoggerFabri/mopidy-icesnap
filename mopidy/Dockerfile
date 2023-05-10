@@ -27,8 +27,10 @@ EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
 
+ADD ./start.sh /start.sh
+
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["mopidy", "--config", "/mopidy/mopidy.conf"]
+CMD ["/start.sh"]
 
 HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
     CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:6680/ || exit 1
