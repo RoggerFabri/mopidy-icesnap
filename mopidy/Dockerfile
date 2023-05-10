@@ -7,6 +7,7 @@ ENV PIP_NO_CACHE_DIR=1
 RUN apt update && apt upgrade -y \
  && apt install -y \
     curl \
+    dumb-init \
     mopidy \
     python3-pip \
  && pip install \
@@ -26,8 +27,8 @@ EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
 
-ENTRYPOINT ["mopidy"]
-CMD ["--config", "/mopidy/mopidy.conf"]
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["mopidy", "--config", "/mopidy/mopidy.conf"]
 
 HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
     CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:6680/ || exit 1
