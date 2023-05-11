@@ -12,7 +12,8 @@ RUN apk update && apk upgrade \
     tzdata \
  && rm -rf /var/cache/apk/* /root/.cache
 
-HEALTHCHECK --interval=5s --timeout=3s CMD pgrep snapclient || exit 1
-
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
+
+HEALTHCHECK --interval=5s --timeout=3s \
+   CMD pgrep snapclient || exit 1
