@@ -12,5 +12,10 @@ RUN apk update && apk upgrade \
     tzdata \
  && rm -rf /var/cache/apk/* /root/.cache
 
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+HEALTHCHECK --interval=5s --timeout=3s CMD pgrep snapclient || exit 1
+
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
