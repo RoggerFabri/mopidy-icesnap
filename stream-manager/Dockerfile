@@ -23,3 +23,6 @@ USER appuser
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD [ "python3","-u","./stream_manager.py" ]
+
+HEALTHCHECK --interval=5s --timeout=3s \
+  CMD netstat -a | grep $SNAPSERVER_IP.*$SNAPSERVER_PORT.*ESTABLISHED
