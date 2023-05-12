@@ -18,5 +18,8 @@ RUN apk update && apk upgrade \
 
 COPY stream_manager.py stream_manager.py
 
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
 ENTRYPOINT ["dumb-init", "--"]
 CMD [ "python3","-u","./stream_manager.py" ]
