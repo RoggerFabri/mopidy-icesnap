@@ -4,7 +4,6 @@ import os
 import snapcast.control
 import sys
 import socket
-from apscheduler.schedulers.background import BackgroundScheduler
 
 logging.basicConfig(
     format='[%(asctime)s] %(levelname)-8s [%(funcName)s:%(lineno)d] — %(message)s',
@@ -26,19 +25,6 @@ if serverPort is None:
     logging.error('ENV|SNAPSERVER_PORT not provided, exiting...')
     sys.exit()
 
-def check_snapserver():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    try:
-        socket.gethostbyname(serverIp)
-
-        result = sock.connect_ex((serverIp, int(serverPort)))
-        if result != 0:
-            logging.error("[⚠] Snapserver is down!")
-        sock.close()
-    except socket.error:
-        logging.error("[⚠] Ip or hostname cannot be resolved")
-
 def on_stream_update(data):
     for server_stream in server.streams:
         if server_stream.status == 'playing':
@@ -55,10 +41,6 @@ except Exception as e:
     sys.exit()
 
 try:
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(check_snapserver, 'interval', seconds=5)
-    scheduler.start()
-
     for stream in server.streams:
         stream.set_callback(on_stream_update)
 
