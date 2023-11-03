@@ -3,7 +3,7 @@ version: "2.4"
 services:
   icecast:
     container_name: icecast
-    image: rfabri/icecast:amd64-latest
+    image: rfabri/icecast:arm64v8-latest
     restart: unless-stopped
     environment:
       - ICECAST_SOURCE_PASSWORD=mopidy
@@ -15,7 +15,7 @@ services:
 
   mopidy-icecast:
     container_name: mopidy-icecast
-    image: rfabri/mopidy:amd64-latest
+    image: rfabri/mopidy:arm64v8-latest
     restart: unless-stopped
     ports:
       - "6601:6600"
