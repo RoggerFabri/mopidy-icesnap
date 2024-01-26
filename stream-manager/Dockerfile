@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.18.5
 LABEL Author="Rogger Fabri"
 
 ENV SNAPSERVER_IP=127.0.0.1
