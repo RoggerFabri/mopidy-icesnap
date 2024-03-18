@@ -14,11 +14,7 @@ RUN apt update && apt upgrade -y \
  && dpkg -i snapserver_${snapcast_version}-1_${target_arch}.deb \
   ; apt update && apt -f install -y \
  && rm snapserver_${snapcast_version}-1_${target_arch}.deb \
- && curl -sSL https://dtcooper.github.io/raspotify/key.asc | tee /usr/share/keyrings/raspotify_key.asc  > /dev/null \
- && chmod 644 /usr/share/keyrings/raspotify_key.asc \
- && echo 'deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.github.io/raspotify raspotify main' | tee /etc/apt/sources.list.d/raspotify.list \
- && apt update && apt -y install \
-    raspotify \
+ && curl -sL https://dtcooper.github.io/raspotify/install.sh | sh \
  && apt purge --auto-remove -y \
     gcc \
  && apt clean \
