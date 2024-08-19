@@ -3,7 +3,6 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
-ENV ARCH=amd64
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
