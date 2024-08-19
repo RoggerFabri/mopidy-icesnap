@@ -10,9 +10,6 @@ on:
   schedule:
     - cron: '0 5 * * *'
 
-env:
-  ARCH: arm64
-
 jobs:
   build:
     name: Call Azure Pipeline
