@@ -3,6 +3,7 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
+ENV ARCH=amd64
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
@@ -16,12 +17,20 @@ RUN apt update && apt upgrade -y \
     Mopidy-Mobile \
     Mopidy-MPD \
     Mopidy-Scrobbler \
-   # Mopidy-Spotify \
+    Mopidy-Spotify==5.0.0a2 \
     Mopidy-TuneIn \
  && apt purge --auto-remove -y \
     gcc \
  && apt clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
+
+RUN curl -L -o gst-plugin-spotify_0.12.2-1_${ARCH}.deb https://github.com/kingosticks/gst-plugins-rs-build/releases/download/gst-plugin-spotify_0.12.2-1/gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
+ && dpkg -i gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
+ && apt update && apt -f install -y
+
+RUN curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_${ARCH}.deb \
+ && dpkg -i libshout3_2.4.1-2_${ARCH}.deb \
+ && apt update && apt -f install -y
 
 EXPOSE 6600
 EXPOSE 6680
