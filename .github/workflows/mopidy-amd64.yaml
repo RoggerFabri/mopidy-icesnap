@@ -10,9 +10,6 @@ on:
   schedule:
     - cron: '0 5 * * *'
 
-env:
-  ARCH: amd64
-
 jobs:
   docker:
     runs-on: ubuntu-latest

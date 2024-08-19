@@ -1,7 +1,7 @@
 FROM debian:11-slim
 LABEL Author="Rogger Fabri"
 
-ARG ARCH
+ARG ARCH=amd64
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
