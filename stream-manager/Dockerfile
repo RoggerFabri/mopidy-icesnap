@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3
 LABEL Author="Rogger Fabri"
 
 ENV SNAPSERVER_IP=127.0.0.1
@@ -11,6 +11,7 @@ RUN apk update && apk upgrade \
     py3-pip \
     python3 \
     tzdata \
+ && mkdir -p ~/.config/pip && echo -e "[global]\nbreak-system-packages = true" | tee ~/.config/pip/pip.conf \
  && pip3 install --upgrade pip \
  && pip3 install apscheduler \
  && pip3 install snapcast \
