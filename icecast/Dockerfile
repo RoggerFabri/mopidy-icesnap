@@ -1,4 +1,4 @@
-FROM debian:11-slim
+FROM debian:12-slim
 LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
