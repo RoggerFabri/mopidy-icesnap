@@ -1,4 +1,4 @@
-FROM debian:11-slim
+FROM debian:12-slim
 LABEL Author="Rogger Fabri"
 
 ARG ARCH=amd64
@@ -12,6 +12,7 @@ RUN apt update && apt upgrade -y \
     dumb-init \
     mopidy \
     python3-pip \
+ && mkdir -p ~/.config/pip && printf "[global]\nbreak-system-packages = true\n" | tee ~/.config/pip/pip.conf \
  && pip install \
     Mopidy-Iris \
     Mopidy-Local \
