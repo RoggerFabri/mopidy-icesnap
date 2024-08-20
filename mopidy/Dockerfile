@@ -34,6 +34,8 @@ RUN curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/poo
  && dpkg -i libshout3_2.4.1-2_${ARCH}.deb \
  ; apt update && apt -f install -y
 
+RUN sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.9/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers'
+
 EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
