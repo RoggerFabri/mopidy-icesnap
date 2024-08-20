@@ -10,9 +10,9 @@ RUN apt update && apt upgrade -y \
  && apt install -y \
     curl \
     dumb-init \
+    mopidy \
     python3-pip \
  && pip install \
-    Mopidy \
     Mopidy-Iris \
     Mopidy-Local \
     Mopidy-Mobile \
@@ -31,7 +31,7 @@ RUN curl -L -o gst-plugin-spotify_0.12.2-1_${ARCH}.deb https://github.com/kingos
 
 RUN curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_${ARCH}.deb \
  && dpkg -i libshout3_2.4.1-2_${ARCH}.deb \
-  ; apt update && apt -f install -y
+ ; apt update && apt -f install -y
 
 EXPOSE 6600
 EXPOSE 6680
