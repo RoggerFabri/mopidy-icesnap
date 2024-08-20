@@ -10,9 +10,9 @@ RUN apt update && apt upgrade -y \
  && apt install -y \
     curl \
     dumb-init \
-    mopidy \
     python3-pip \
  && pip install \
+    Mopidy \
     Mopidy-Iris \
     Mopidy-Local \
     Mopidy-Mobile \

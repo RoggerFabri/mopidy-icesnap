@@ -18,8 +18,6 @@ COPY www/ /usr/share/icecast2/web/
 
 RUN chown -R icecast2 /usr/share/icecast2
 
-VOLUME ["/var/log/icecast2", "/usr/share/icecast2"]
-
 ADD ./start.sh /start.sh
 
 EXPOSE 8000
