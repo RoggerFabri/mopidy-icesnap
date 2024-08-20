@@ -29,11 +29,13 @@ RUN apt update && apt upgrade -y \
 
 RUN curl -L -o gst-plugin-spotify_0.12.2-1_${ARCH}.deb https://github.com/kingosticks/gst-plugins-rs-build/releases/download/gst-plugin-spotify_0.12.2-1/gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
  && dpkg -i gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
-  ; apt update && apt -f install -y
+  ; apt update && apt -f install -y \
+ && gst-plugin-spotify_0.12.2-1_${ARCH}.deb
 
 RUN curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_${ARCH}.deb \
  && dpkg -i libshout3_2.4.1-2_${ARCH}.deb \
- ; apt update && apt -f install -y
+ ; apt update && apt -f install -y \
+ && dpkg -i libshout3_2.4.1-2_${ARCH}.deb
 
 RUN sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.11/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers'
 
