@@ -39,6 +39,8 @@ RUN curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/poo
 
 RUN sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.11/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers'
 
+USER mopidy
+
 EXPOSE 6600
 EXPOSE 6680
 EXPOSE 5555/udp
