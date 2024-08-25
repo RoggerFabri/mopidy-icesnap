@@ -26,6 +26,8 @@ jobs:
         with:
           push: true
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapserver"
-          tags: ${{ secrets.DOCKERHUB_SLUG }}/snapserver:amd64-latest
+          tags: |
+            ${{ secrets.DOCKERHUB_SLUG }}/snapserver:amd64-latest
+            ${{ secrets.DOCKERHUB_SLUG }}/snapserver:amd64-${{github.run_number}}
           build-args: |
             target_arch=amd64

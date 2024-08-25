@@ -26,4 +26,6 @@ jobs:
         with:
           push: true
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:stream-manager"
-          tags: ${{ secrets.DOCKERHUB_SLUG }}/stream-manager:amd64-latest
+          tags: |
+            ${{ secrets.DOCKERHUB_SLUG }}/stream-manager:amd64-latest
+            ${{ secrets.DOCKERHUB_SLUG }}/stream-manager:amd64-${{github.run_number}}

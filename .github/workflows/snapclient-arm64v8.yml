@@ -26,4 +26,6 @@ jobs:
         with:
           push: true
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapclient"
-          tags: ${{ secrets.DOCKERHUB_SLUG }}/snapclient:arm64v8-latest
+          tags: |
+            ${{ secrets.DOCKERHUB_SLUG }}/snapclient:arm64v8-latest
+            ${{ secrets.DOCKERHUB_SLUG }}/snapclient:arm64v8-${{github.run_number}}
