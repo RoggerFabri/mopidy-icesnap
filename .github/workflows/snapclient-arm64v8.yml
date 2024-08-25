@@ -7,8 +7,6 @@ on:
       - "master"
     paths:
       - "snapclient/**"
-  schedule:
-    - cron: '0 5 * * *'
 
 jobs:
   docker:

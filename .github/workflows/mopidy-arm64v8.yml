@@ -7,8 +7,6 @@ on:
       - "master"
     paths:
       - "mopidy/**"
-  schedule:
-    - cron: '0 5 * * *'
 
 jobs:
   docker:
