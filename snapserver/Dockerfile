@@ -3,18 +3,17 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG snapcast_version=0.28.0
+ARG snapcast_version=0.29.0
 ARG target_arch=arm64
 ARG dist=bookworm
 
 RUN apt update && apt upgrade -y \
     curl \
     dumb-init \
- && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}-${dist}.deb \
- && dpkg --add-architecture arm64 \
- && dpkg -i snapserver_${snapcast_version}-1_${target_arch}-${dist}.deb \
+ && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_${target_arch}_${dist}.deb \
+ && dpkg -i snapserver_${snapcast_version}-1_${target_arch}_${dist}.deb \
   ; apt update && apt -f install -y \
- && rm snapserver_${snapcast_version}-1_${target_arch}-${dist}.deb \
+ && rm snapserver_${snapcast_version}-1_${target_arch}_${dist}.deb \
  && curl -sL https://dtcooper.github.io/raspotify/install.sh | sh \
  && apt purge --auto-remove -y \
     gcc \
