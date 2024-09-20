@@ -27,3 +27,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/mopidy:arm64v8-latest
             ${{ secrets.DOCKERHUB_SLUG }}/mopidy:arm64v8-${{github.run_number}}
+          build-args: |
+            ARCH=arm64
