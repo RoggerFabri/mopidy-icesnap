@@ -2,6 +2,7 @@ FROM debian:12-slim
 LABEL Author="Rogger Fabri"
 
 ARG ARCH=amd64
+ARG GST_PLUGIN_SPOTIFY_VERSION=0.13.1-1
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1
@@ -27,10 +28,10 @@ RUN apt update && apt upgrade -y \
  && apt clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache /root/.cache
 
-RUN curl -L -o gst-plugin-spotify_0.12.2-1_${ARCH}.deb https://github.com/kingosticks/gst-plugins-rs-build/releases/download/gst-plugin-spotify_0.12.2-1/gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
- && dpkg -i gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
+RUN curl -L -o gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION}_${ARCH}.deb https://github.com/kingosticks/gst-plugins-rs-build/releases/download/gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION}/gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION}_${ARCH}.deb \
+ && dpkg -i gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION}_${ARCH}.deb \
   ; apt update && apt -f install -y \
- && rm gst-plugin-spotify_0.12.2-1_${ARCH}.deb \
+ && rm gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION}_${ARCH}.deb \
  && curl -L -o libshout3_2.4.1-2_${ARCH}.deb http://ftp.de.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_${ARCH}.deb \
  && dpkg -i libshout3_2.4.1-2_${ARCH}.deb \
   ; apt update && apt -f install -y \
