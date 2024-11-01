@@ -1,4 +1,4 @@
-name: snapserver-arm64v8
+name: stream-manager-arm64v8
 
 on:
   workflow_dispatch:
