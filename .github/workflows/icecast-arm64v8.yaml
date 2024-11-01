@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapserver"
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:icecast"
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/icecast:arm64v8-latest
             ${{ secrets.DOCKERHUB_SLUG }}/icecast:arm64v8-${{github.run_number}}
