@@ -3,7 +3,7 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG snapcast_version=0.29.0
+ARG snapcast_version=0.30.0
 ARG target_arch=arm64
 ARG dist=bookworm
 
