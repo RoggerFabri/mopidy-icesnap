@@ -124,3 +124,36 @@ Pre-built Docker images are available at: [https://hub.docker.com/u/rfabri](http
 | :----------: | :-------: | --------------- |
 |    x86-64    |    ✅     | amd64-latest   |
 |    arm64     |    ✅     | arm64v8-latest |
+
+## Troubleshooting
+
+### Common Issues
+
+1. **No sound from Snapcast clients**
+   - Check that the client is connected to the server
+   - Verify audio devices are properly configured
+   - Ensure firewall isn't blocking ports
+
+2. **Spotify authentication fails**
+   - Double-check client ID and secret
+   - Verify Spotify account has an active subscription
+
+3. **Icecast stream not accessible**
+   - Check if the Icecast container is running
+   - Verify port forwarding if accessing from outside the network
+
+### Logs
+Access container logs for troubleshooting:
+```bash
+docker logs mopidy
+docker logs icecast
+docker logs snapserver
+```
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Acknowledgments
+- [Mopidy](https://github.com/mopidy/mopidy) team for the excellent music server
+- [Snapcast](https://github.com/badaix/snapcast) developers for the synchronized audio solution
+- [Icecast](https://gitlab.xiph.org/xiph/icecast-server/) team for the streaming server
