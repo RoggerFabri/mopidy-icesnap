@@ -75,10 +75,7 @@ async def main():
 
 # Entry point with proper asyncio handling
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
     try:
-        loop.run_until_complete(main())
+        asyncio.run(main())
     except KeyboardInterrupt:
         logging.info("Stream manager shutting down...")
-    finally:
-        loop.close()
