@@ -46,7 +46,7 @@ def on_stream_update(data):
     for server_stream in server.streams:
         if server_stream.status == 'playing':
             for group in server.groups:
-                loop.create_task(group.set_stream(server_stream.identifier))
+                asyncio.get_event_loop().create_task(group.set_stream(server_stream.identifier))
             logging.info(f'Switched all groups to stream: {server_stream.identifier}')
             break  # Only use the first playing stream
 

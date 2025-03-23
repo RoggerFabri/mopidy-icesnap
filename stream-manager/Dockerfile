@@ -13,8 +13,7 @@ RUN apk update && apk upgrade \
     tzdata \
  && mkdir -p ~/.config/pip && echo -e "[global]\nbreak-system-packages = true" | tee ~/.config/pip/pip.conf \
  && pip3 install --upgrade pip \
- && pip3 install apscheduler \
- && pip3 install snapcast \
+ && pip3 install apscheduler snapcast \
  && rm -rf /var/cache/apk/* /root/.cache 
 
 COPY stream_manager.py stream_manager.py
