@@ -29,7 +29,7 @@ if serverPort is None:
     logging.error('ENV|SNAPSERVER_PORT not provided, exiting...')
     sys.exit(1)
 
-async def connect_to_server(ip: str, port: str) -> Optional[snapcast.control.Server]:
+async def connect_to_server(ip: str, port: str) -> Optional[snapcast.control.server]:
     """Establish connection to the Snapcast server."""
     try:
         logging.info(f'Connecting to server at {ip}:{port}...')
