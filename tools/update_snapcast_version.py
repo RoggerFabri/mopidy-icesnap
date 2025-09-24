@@ -61,7 +61,7 @@ def read_current_version(text: str) -> str:
 
 
 def update_text(text: str, new_version: str) -> str:
-    return RE_VERSION.sub(rf"\\1{new_version}", text, count=1)
+    return RE_VERSION.sub(lambda match: f"{match.group(1)}{new_version}", text, count=1)
 
 
 def main() -> int:
