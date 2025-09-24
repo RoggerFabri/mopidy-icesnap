@@ -1,4 +1,4 @@
-name: snapcast-update-version
+name: Update Snapcast Version
 
 on:
   schedule:
@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 jobs:
   bump:
@@ -48,3 +49,19 @@ jobs:
             Bump Snapcast to the latest upstream release via `tools/update_snapcast_version.py`.
 
             Automated update triggered by the scheduled workflow.
+
+      - name: Trigger snapclient-amd64 Build
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: snapcast-update-version
+
+      - name: Trigger snapclient-arm64v8 Build
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: snapcast-update-version

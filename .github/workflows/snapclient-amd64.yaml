@@ -7,6 +7,8 @@ on:
       - "master"
     paths:
       - "snapclient/**"
+  repository_dispatch:
+    types: [snapcast-update-version]
 
 jobs:
   build-and-push:
