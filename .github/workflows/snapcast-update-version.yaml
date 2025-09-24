@@ -1,5 +1,4 @@
-name: Update Snapcast Version
-
+name: snapcast-update-version
 on:
   schedule:
     - cron: "17 3 * * *"
@@ -14,20 +13,20 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check Out Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Update Snapcast version
+      - name: Update Snapcast Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python tools/update_snapcast_version.py
 
-      - name: Detect changes
+      - name: Detect Changes
         id: diff
         run: |
           if git diff --quiet; then
@@ -36,7 +35,7 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create pull request
+      - name: Create Pull Request
         if: steps.diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
