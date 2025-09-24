@@ -1,4 +1,4 @@
-name: Update Snapcast Version
+name: update-snapcast-version
 
 on:
   schedule:
