@@ -29,3 +29,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/snapclient:amd64-latest
             ${{ secrets.DOCKERHUB_SLUG }}/snapclient:amd64-${{github.run_number}}
+          build-args: |
+            target_arch=amd64

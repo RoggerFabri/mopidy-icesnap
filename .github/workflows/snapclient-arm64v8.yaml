@@ -34,3 +34,5 @@ jobs:
             ${{ secrets.DOCKERHUB_SLUG }}/snapclient:arm64v8-latest
             ${{ secrets.DOCKERHUB_SLUG }}/snapclient:arm64v8-${{github.run_number}}
           platforms: linux/arm64
+          build-args: |
+            target_arch=arm64
