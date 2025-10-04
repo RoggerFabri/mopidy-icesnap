@@ -64,3 +64,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: snapcast-update-version
+
+      - name: Trigger snapserver-amd64 Build
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: snapcast-update-version
+
+      - name: Trigger snapserver-arm64v8 Build
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: snapcast-update-version

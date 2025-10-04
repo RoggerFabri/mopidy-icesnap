@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Update Snapcast version in snapserver Dockerfile."""
+"""Update Snapcast version in all Dockerfiles."""
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import os
 import pathlib
@@ -16,12 +17,12 @@ GITHUB_API = "https://api.github.com/repos/badaix/snapcast/releases/latest"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Bump the Snapcast version used by the snapserver image.")
+    parser = argparse.ArgumentParser(description="Bump the Snapcast version used by all snapcast images.")
     parser.add_argument(
-        "--file",
+        "--files",
+        nargs="*",
         type=pathlib.Path,
-        default=pathlib.Path("snapserver") / "Dockerfile",
-        help="Path to the Dockerfile that declares ARG snapcast_version.",
+        help="Specific Dockerfile(s) to update (defaults to all Dockerfiles with ARG snapcast_version).",
     )
     parser.add_argument(
         "--version",
@@ -30,9 +31,26 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show the planned change without modifying the Dockerfile.",
+        help="Show the planned changes without modifying the Dockerfiles.",
     )
     return parser.parse_args()
+
+
+def find_dockerfiles() -> list[pathlib.Path]:
+    """Find all Dockerfiles that contain ARG snapcast_version."""
+    pattern = "**/Dockerfile*"
+    dockerfiles = []
+    
+    for dockerfile_path in glob.glob(pattern, recursive=True):
+        path_obj = pathlib.Path(dockerfile_path)
+        try:
+            contents = path_obj.read_text(encoding="utf-8")
+            if RE_VERSION.search(contents):
+                dockerfiles.append(path_obj)
+        except (FileNotFoundError, UnicodeDecodeError):
+            continue
+    
+    return dockerfiles
 
 
 def fetch_latest_version() -> str:
@@ -66,29 +84,54 @@ def update_text(text: str, new_version: str) -> str:
 
 def main() -> int:
     args = parse_args()
-    dockerfile = args.file
-
-    try:
-        contents = dockerfile.read_text(encoding="utf-8")
-    except FileNotFoundError:
-        raise SystemExit(f"Dockerfile not found: {dockerfile}")
-
-    current_version = read_current_version(contents)
+    
+    # Determine which Dockerfiles to update
+    if args.files:
+        dockerfiles = [path for file_path in args.files if (path := pathlib.Path(file_path)).exists()]
+        if not dockerfiles:
+            raise SystemExit("None of the specified Dockerfiles exist")
+    else:
+        dockerfiles = find_dockerfiles()
+        if not dockerfiles:
+            raise SystemExit("No Dockerfiles with ARG snapcast_version found")
 
     desired_version = (args.version or fetch_latest_version()).lstrip("v")
+    
+    updated_files = []
+    no_change_files = []
+    
+    for dockerfile in dockerfiles:
+        try:
+            contents = dockerfile.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            print(f"Warning: Dockerfile not found: {dockerfile}")
+            continue
 
-    if desired_version == current_version:
-        print(f"snapcast_version already at {current_version}")
-        return 0
+        current_version = read_current_version(contents)
 
-    updated_contents = update_text(contents, desired_version)
+        if desired_version == current_version:
+            no_change_files.append((dockerfile, current_version))
+            continue
 
+        updated_contents = update_text(contents, desired_version)
+        updated_files.append((dockerfile, current_version, desired_version))
+
+        if not args.dry_run:
+            dockerfile.write_text(updated_contents, encoding="utf-8")
+
+    # Report results
     if args.dry_run:
-        print(f"Would bump snapcast_version from {current_version} to {desired_version}")
-        return 0
+        print(f"Would bump snapcast_version to {desired_version} in:")
+        for dockerfile, old_version, new_version in updated_files:
+            print(f"  {dockerfile} ({old_version} -> {new_version})")
+    else:
+        print(f"Updated snapcast_version to {desired_version} in:")
+        for dockerfile, old_version, new_version in updated_files:
+            print(f"  {dockerfile} ({old_version} -> {new_version})")
+    
+    for dockerfile, current_version in no_change_files:
+        print(f"  {dockerfile} already at {current_version}")
 
-    dockerfile.write_text(updated_contents, encoding="utf-8")
-    print(f"Updated snapcast_version from {current_version} to {desired_version}")
     return 0
 
 
