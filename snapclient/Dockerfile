@@ -28,4 +28,4 @@ ENTRYPOINT ["dumb-init", "--"]
 CMD ["sh","-c","snapclient -h $SERVER -s $DEVICE --hostID $CLIENT_ID"]
 
 HEALTHCHECK --interval=5s --timeout=3s \
-   CMD pgrep snapclient || exit 1
+   CMD cat /proc/*/comm | grep -q '^snapclient$' || exit 1
