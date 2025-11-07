@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Update Snapcast version in all Dockerfiles."""
+"""Update Raspotify version in all Dockerfiles."""
 from __future__ import annotations
 
 import argparse
@@ -12,21 +12,21 @@ import sys
 import urllib.error
 import urllib.request
 
-RE_VERSION = re.compile(r"^(ARG\s+snapcast_version=)(?P<version>[0-9]+\.[0-9]+\.[0-9]+)\s*$", re.MULTILINE)
-GITHUB_API = "https://api.github.com/repos/badaix/snapcast/releases/latest"
+RE_VERSION = re.compile(r"^(ARG\s+raspotify_version=)(?P<version>[0-9]+\.[0-9]+\.[0-9]+)\s*$", re.MULTILINE)
+GITHUB_API = "https://api.github.com/repos/dtcooper/raspotify/releases/latest"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Bump the Snapcast version used by all snapcast images.")
+    parser = argparse.ArgumentParser(description="Bump the Raspotify version used by all raspotify images.")
     parser.add_argument(
         "--files",
         nargs="*",
         type=pathlib.Path,
-        help="Specific Dockerfile(s) to update (defaults to all Dockerfiles with ARG snapcast_version).",
+        help="Specific Dockerfile(s) to update (defaults to all Dockerfiles with ARG raspotify_version).",
     )
     parser.add_argument(
         "--version",
-        help="Snapcast version to set (defaults to the latest GitHub release).",
+        help="Raspotify version to set (defaults to the latest GitHub release).",
     )
     parser.add_argument(
         "--dry-run",
@@ -37,7 +37,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def find_dockerfiles() -> list[pathlib.Path]:
-    """Find all Dockerfiles that contain ARG snapcast_version."""
+    """Find all Dockerfiles that contain ARG raspotify_version."""
     # Start search from the repository root (parent of tools directory)
     repo_root = pathlib.Path(__file__).parent.parent
     pattern = repo_root / "**/Dockerfile*"
@@ -64,11 +64,11 @@ def fetch_latest_version() -> str:
         with urllib.request.urlopen(request, timeout=30) as response:
             payload = json.load(response)
     except urllib.error.URLError as exc:  # pragma: no cover - network failure reported upstream
-        raise SystemExit(f"Failed to fetch latest Snapcast release: {exc}") from exc
+        raise SystemExit(f"Failed to fetch latest Raspotify release: {exc}") from exc
 
     tag_name = payload.get("tag_name")
     if not tag_name:
-        raise SystemExit("Snapcast release payload did not contain tag_name")
+        raise SystemExit("Raspotify release payload did not contain tag_name")
 
     return tag_name.lstrip("v")
 
@@ -76,7 +76,7 @@ def fetch_latest_version() -> str:
 def read_current_version(text: str) -> str:
     match = RE_VERSION.search(text)
     if not match:
-        raise SystemExit("Could not find ARG snapcast_version line in Dockerfile")
+        raise SystemExit("Could not find ARG raspotify_version line in Dockerfile")
     return match.group("version")
 
 
@@ -95,7 +95,7 @@ def main() -> int:
     else:
         dockerfiles = find_dockerfiles()
         if not dockerfiles:
-            raise SystemExit("No Dockerfiles with ARG snapcast_version found")
+            raise SystemExit("No Dockerfiles with ARG raspotify_version found")
 
     desired_version = (args.version or fetch_latest_version()).lstrip("v")
     
@@ -123,11 +123,11 @@ def main() -> int:
 
     # Report results
     if args.dry_run:
-        print(f"Would bump snapcast_version to {desired_version} in:")
+        print(f"Would bump raspotify_version to {desired_version} in:")
         for dockerfile, old_version, new_version in updated_files:
             print(f"  {dockerfile} ({old_version} -> {new_version})")
     else:
-        print(f"Updated snapcast_version to {desired_version} in:")
+        print(f"Updated raspotify_version to {desired_version} in:")
         for dockerfile, old_version, new_version in updated_files:
             print(f"  {dockerfile} ({old_version} -> {new_version})")
     
@@ -139,3 +139,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
