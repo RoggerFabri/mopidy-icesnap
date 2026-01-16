@@ -22,7 +22,7 @@ RUN apt update && apt upgrade -y \
     Mopidy-Mobile \
     Mopidy-MPD \
     Mopidy-Scrobbler \
-    Mopidy-Spotify==5.0.0a3 \
+    Mopidy-Spotify==5.0.0a6 \
     Mopidy-TuneIn \
  && apt purge --auto-remove -y \
     gcc \
