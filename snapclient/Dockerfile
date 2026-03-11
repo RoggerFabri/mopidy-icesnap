@@ -6,7 +6,7 @@ ENV SERVER=snapserver
 ENV DEVICE=Headphones
 ENV CLIENT_ID=snapclient
 
-ARG snapcast_version=0.34.0
+ARG snapcast_version=0.35.0
 ARG target_arch=arm64
 ARG dist=bookworm
 
