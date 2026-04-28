@@ -22,15 +22,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 RUN --mount=type=cache,target=/root/.cache/pip \
     mkdir -p ~/.config/pip \
  && printf "[global]\nbreak-system-packages = true\n" | tee ~/.config/pip/pip.conf \
- && pip install --ignore-installed typing_extensions \
  && pip install \
-    "Mopidy>=4.0" \
     Mopidy-Iris \
     Mopidy-Local \
     Mopidy-Mobile \
     Mopidy-MPD \
     Mopidy-Scrobbler \
-    Mopidy-Spotify==5.0.0 \
+    Mopidy-Spotify==5.0.0a3 \
     Mopidy-TuneIn
 
 RUN curl -L -o gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION_FILE}_${ARCH}.deb https://github.com/kingosticks/gst-plugins-rs-build/releases/download/gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION_PATH}/gst-plugin-spotify_${GST_PLUGIN_SPOTIFY_VERSION_FILE}_${ARCH}.deb \
