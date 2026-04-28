@@ -12,12 +12,10 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to Docker Hub
@@ -36,3 +34,5 @@ jobs:
           platforms: linux/arm64
           build-args: |
             target_arch=arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
