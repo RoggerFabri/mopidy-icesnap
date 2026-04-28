@@ -22,8 +22,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 RUN --mount=type=cache,target=/root/.cache/pip \
     mkdir -p ~/.config/pip \
  && printf "[global]\nbreak-system-packages = true\n" | tee ~/.config/pip/pip.conf \
- && pip install --ignore-installed typing_extensions \
  && pip install \
+    "Mopidy<4.0" \
     Mopidy-Iris \
     Mopidy-Local \
     Mopidy-Mobile \
