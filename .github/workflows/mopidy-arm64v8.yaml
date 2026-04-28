@@ -34,3 +34,5 @@ jobs:
           platforms: linux/arm64
           build-args: |
             ARCH=arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
