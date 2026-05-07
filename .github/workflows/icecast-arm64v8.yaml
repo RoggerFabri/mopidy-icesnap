@@ -1,7 +1,14 @@
 name: icecast-arm64v8
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "icecast/**"
   push:
     branches:
       - "master"
@@ -12,8 +19,6 @@ jobs:
   build-and-push:
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to Docker Hub
@@ -24,11 +29,13 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:icecast"
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/icecast:arm64v8-latest
             ${{ secrets.DOCKERHUB_SLUG }}/icecast:arm64v8-${{github.run_number}}
           platforms: linux/arm64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          provenance: true
+          sbom: true
+          cache-from: type=gha,scope=icecast-arm64
+          cache-to: type=gha,mode=max,scope=icecast-arm64

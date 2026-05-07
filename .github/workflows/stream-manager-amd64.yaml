@@ -1,7 +1,14 @@
 name: stream-manager-amd64
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "stream-manager/**"
   push:
     branches:
       - "master"
@@ -22,10 +29,12 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:stream-manager"
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/stream-manager:amd64-latest
             ${{ secrets.DOCKERHUB_SLUG }}/stream-manager:amd64-${{github.run_number}}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          provenance: true
+          sbom: true
+          cache-from: type=gha,scope=stream-manager-amd64
+          cache-to: type=gha,mode=max,scope=stream-manager-amd64
