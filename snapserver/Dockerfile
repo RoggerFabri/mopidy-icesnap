@@ -32,7 +32,7 @@ RUN dpkg -l | grep -i raspotify
 EXPOSE 1704 1705 1780
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["bash","-c","snapserver"]
+CMD ["snapserver"]
 
 HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
     CMD curl --connect-timeout 5 --silent --show-error --fail http://localhost:1780/ || exit 1
