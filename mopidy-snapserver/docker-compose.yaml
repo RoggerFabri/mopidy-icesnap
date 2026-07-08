@@ -21,9 +21,15 @@ services:
       - TZ=<YOUR_TIMEZONE>
       - DEVICE_NAME=Snapcast
       - ZEROCONF_PORT=39799
+      # Default backend announces through the host's avahi daemon (socket
+      # mounts below). On hosts without avahi, set ZEROCONF_BACKEND=libmdns
+      # and drop the two socket mounts.
+      - ZEROCONF_BACKEND=avahi
     volumes:
       - shared_pipes:/tmp
       - <HOST_PATH>/librespot:/var/cache/librespot
+      - /var/run/avahi-daemon:/var/run/avahi-daemon
+      - /var/run/dbus:/var/run/dbus
 
   shairport-sync:
     container_name: shairport-sync

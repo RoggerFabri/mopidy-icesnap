@@ -10,6 +10,7 @@ ENV DEVICE_NAME=Snapcast \
     BITRATE=320 \
     INITIAL_VOLUME=100 \
     ZEROCONF_PORT=39799 \
+    ZEROCONF_BACKEND=avahi \
     CACHE_DIR=/var/cache/librespot \
     PIPE_PATH=/tmp/librespot-audio \
     METADATA_PIPE=/tmp/librespot-metadata \

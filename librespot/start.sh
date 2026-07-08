@@ -25,6 +25,7 @@ librespot \
     --bitrate "$BITRATE" \
     --initial-volume "$INITIAL_VOLUME" \
     --zeroconf-port "$ZEROCONF_PORT" \
+    --zeroconf-backend "$ZEROCONF_BACKEND" \
     --cache "$CACHE_DIR" \
     --disable-audio-cache \
     --onevent /onevent.sh \
