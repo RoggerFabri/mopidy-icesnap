@@ -49,31 +49,9 @@ jobs:
 
             Automated update triggered by the scheduled workflow.
 
-      - name: Trigger snapclient-amd64 Build
-        if: steps.diff.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          event-type: snapcast-update-version
-
-      - name: Trigger snapclient-arm64v8 Build
-        if: steps.diff.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          event-type: snapcast-update-version
-
-      - name: Trigger snapserver-amd64 Build
-        if: steps.diff.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          event-type: snapcast-update-version
-
-      - name: Trigger snapserver-arm64v8 Build
+      # A single dispatch of this event-type triggers every workflow listening
+      # for it (snapclient + snapserver, both arches).
+      - name: Trigger snapclient and snapserver Builds
         if: steps.diff.outputs.changed == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
