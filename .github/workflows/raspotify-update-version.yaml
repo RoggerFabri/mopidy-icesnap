@@ -49,15 +49,7 @@ jobs:
 
             Automated update triggered by the scheduled workflow.
 
-      - name: Trigger snapserver-amd64 Build
-        if: steps.diff.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          event-type: raspotify-update-version
-
-      - name: Trigger snapserver-arm64v8 Build
+      - name: Trigger librespot Builds
         if: steps.diff.outputs.changed == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
