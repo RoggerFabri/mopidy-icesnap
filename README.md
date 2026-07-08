@@ -61,9 +61,17 @@ The system uses Iris as the primary web frontend, offering a beautiful and respo
 Snapcast provides multi-room client-server audio playback with perfect synchronization between all clients. Features include:
 
 - **Time-Synchronized Playback**: All clients play audio in perfect sync
-- **Multiple Stream Support**: Includes Mopidy and Spotify Connect streams
+- **Multiple Stream Support**: Includes Mopidy, Spotify Connect, and AirPlay (Shairport-Sync) streams
 - **Various Client Options**: Desktop, mobile, and web clients available
-- **Built-in Spotify Connect**: Stream directly from Spotify to Snapcast via Raspotify
+
+### Librespot (Spotify Connect)
+
+A standalone [librespot](https://github.com/librespot-org/librespot) container (built from the Raspotify packages) provides the Spotify Connect endpoint:
+
+- **Runs on the host network** so zeroconf/mDNS discovery works on the LAN — phones can always find the device, even if the Spotify cloud session drops
+- **Feeds audio to Snapserver through a named pipe** (`/tmp/librespot-audio` in the shared pipes volume), like the Shairport-Sync integration
+- **Self-healing**: an in-container watchdog probes librespot's zeroconf endpoint and restarts the container automatically if librespot wedges
+- **Metadata bridge**: player events flow through `/tmp/librespot-metadata` to a Snapcast controlscript (`meta_librespot.py`), so track title/artist/cover show up in Snapweb
 
 ### Stream Manager
 
@@ -97,7 +105,7 @@ The Mopidy configuration for the Icecast setup is in `mopidy-icesnap/mopidy/mopi
 - **[spotify]**: Add your `client_id` and `client_secret` from [Mopidy Spotify Authentication](https://mopidy.com/ext/spotify/#authentication)
 - **[scrobbler]**: Optional Last.fm scrobbler configuration
 
-For the Snapcast setup, review the `snapserver.conf` file and update Spotify credentials if needed.
+For the Snapcast setup, review the `snapserver.conf` file. Spotify Connect needs no credentials in config: the librespot container is discovered via zeroconf and authenticates when you select it in the Spotify app (credentials are then cached in its cache volume).
 
 ### Access Points
 
@@ -138,7 +146,12 @@ Pre-built Docker images are available at: [https://hub.docker.com/u/rfabri](http
    - Double-check client ID and secret
    - Verify Spotify account has an active subscription
 
-3. **Icecast stream not accessible**
+3. **Spotify Connect device not visible**
+   - Check `docker logs librespot` for zeroconf/session errors
+   - The librespot container must run with host networking; verify the zeroconf port (default 39799) is reachable and mDNS (UDP 5353) isn't blocked by a firewall
+   - The container self-restarts if librespot hangs — check `docker inspect librespot --format '{{.RestartCount}}'`
+
+4. **Icecast stream not accessible**
    - Check if the Icecast container is running
    - Verify port forwarding if accessing from outside the network
 
@@ -148,6 +161,7 @@ Access container logs for troubleshooting:
 docker logs mopidy
 docker logs icecast
 docker logs snapserver
+docker logs librespot
 ```
 
 ## License

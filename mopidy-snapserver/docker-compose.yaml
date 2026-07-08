@@ -1,6 +1,47 @@
-version: "2.4"
-
 services:
+  init-pipes:
+    container_name: init-pipes
+    image: alpine:3
+    command: >
+      sh -c "for p in /tmp/snapfifo /tmp/shairport-sync-audio /tmp/shairport-sync-metadata /tmp/librespot-audio /tmp/librespot-metadata;
+             do [ -p $$p ] || { rm -f $$p; mkfifo $$p; }; chmod 777 $$p; done"
+    volumes:
+      - shared_pipes:/tmp
+
+  librespot:
+    container_name: librespot
+    image: rfabri/librespot:arm64v8-latest # amd64-latest on x86-64
+    # Host networking so Spotify Connect zeroconf/mDNS discovery works on the
+    # LAN; the discovery port is fixed via ZEROCONF_PORT.
+    network_mode: host
+    restart: always
+    depends_on:
+      - init-pipes
+    environment:
+      - TZ=<YOUR_TIMEZONE>
+      - DEVICE_NAME=Snapcast
+      - ZEROCONF_PORT=39799
+      # Default backend announces through the host's avahi daemon (socket
+      # mounts below). On hosts without avahi, set ZEROCONF_BACKEND=libmdns
+      # and drop the two socket mounts.
+      - ZEROCONF_BACKEND=avahi
+    volumes:
+      - shared_pipes:/tmp
+      - <HOST_PATH>/librespot:/var/cache/librespot
+      - /var/run/avahi-daemon:/var/run/avahi-daemon
+      - /var/run/dbus:/var/run/dbus
+
+  shairport-sync:
+    container_name: shairport-sync
+    image: mikebrady/shairport-sync
+    network_mode: host
+    restart: always
+    depends_on:
+      - init-pipes
+    volumes:
+      - <HOST_PATH>/shairport-sync/shairport-sync.conf:/etc/shairport-sync.conf
+      - shared_pipes:/tmp
+
   snapserver:
     container_name: snapserver
     image: rfabri/snapserver:arm64v8-latest
@@ -10,10 +51,11 @@ services:
       - "1704:1704"
       - "1705:1705"
       - "1780:1780"
+    depends_on:
+      - init-pipes
     volumes:
-      - ~/snapserver/:/root/.config/snapserver/
-      - ~/snapserver/snapserver.conf:/etc/snapserver.conf
-      - /tmp:/tmp
+      - <HOST_PATH>/snapserver/snapserver.conf:/etc/snapserver.conf
+      - shared_pipes:/tmp
       - /var/run/avahi-daemon:/var/run/avahi-daemon
       - /var/run/dbus:/var/run/dbus
 
@@ -27,17 +69,21 @@ services:
       - "5555:5555/udp"
     depends_on:
       - snapserver
+      - init-pipes
     volumes:
-      - ~/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy/mopidy.conf
-      - ~/mopidy-snapserver/:/mopidy
-      - /tmp:/tmp
+      - <HOST_PATH>/mopidy-icesnap/mopidy/mopidy-snapserver.conf:/mopidy/mopidy.conf
+      - <HOST_PATH>/mopidy-snapserver/:/mopidy
+      - shared_pipes:/tmp
 
   stream-manager:
     container_name: stream-manager
     image: rfabri/stream-manager:arm64v8-latest
-    environment:
-      -  SNAPSERVER_IP=<SNAPSERVER_IP>
-      -  SNAPSERVER_PORT=<SNAPSERVER_PORT>
     restart: unless-stopped
+    environment:
+      - SNAPSERVER_IP=snapserver
+      - SNAPSERVER_PORT=1705
     depends_on:
       - snapserver
+
+volumes:
+  shared_pipes:

@@ -1,0 +1,44 @@
+name: librespot-amd64
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "librespot/**"
+  push:
+    branches:
+      - "master"
+    paths:
+      - "librespot/**"
+  repository_dispatch:
+    types: [raspotify-update-version]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:librespot"
+          tags: |
+            ${{ secrets.DOCKERHUB_SLUG }}/librespot:amd64-latest
+            ${{ secrets.DOCKERHUB_SLUG }}/librespot:amd64-${{github.run_number}}
+          build-args: |
+            target_arch=amd64
+          provenance: true
+          sbom: true
+          cache-from: type=gha,scope=librespot-amd64
+          cache-to: type=gha,mode=max,scope=librespot-amd64
