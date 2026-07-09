@@ -1,9 +1,5 @@
 #!/usr/bin/dumb-init /bin/sh
 
-env
-
-set -x
-
 # librespot's pipe backend opens its output with create=true: if the FIFO is
 # missing it silently writes a growing regular file instead, so both pipes
 # must exist as FIFOs before playback starts.
