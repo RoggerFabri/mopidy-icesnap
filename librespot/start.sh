@@ -29,20 +29,20 @@ librespot \
 LIBRESPOT_PID=$!
 
 # librespot can wedge with its process alive but its Spotify session dead, in
-# which case it never recovers on its own. The zeroconf HTTP endpoint doubles
-# as a liveness probe: on sustained failure, kill librespot so the container
-# exits and docker's restart policy brings it back fresh. TERM first, KILL
-# after a grace period because a wedged process may never handle TERM.
+# which case it never recovers on its own. /probe.sh checks both the zeroconf
+# endpoint and the cloud session: on sustained failure, kill librespot so the
+# container exits and docker's restart policy brings it back fresh. TERM
+# first, KILL after a grace period because a wedged process may never handle
+# TERM.
 (
     fails=0
     while kill -0 "$LIBRESPOT_PID" 2>/dev/null; do
         sleep "$WATCHDOG_INTERVAL"
-        if curl --connect-timeout 5 --max-time 8 --silent --fail \
-                "http://localhost:${ZEROCONF_PORT}/?action=getInfo" >/dev/null; then
+        if /probe.sh; then
             fails=0
         else
             fails=$((fails + 1))
-            echo "watchdog: getInfo probe failed (${fails}/${WATCHDOG_FAILURES})"
+            echo "watchdog: probe failed (${fails}/${WATCHDOG_FAILURES})"
             if [ "$fails" -ge "$WATCHDOG_FAILURES" ]; then
                 echo "watchdog: librespot unresponsive, terminating"
                 kill -TERM "$LIBRESPOT_PID" 2>/dev/null
