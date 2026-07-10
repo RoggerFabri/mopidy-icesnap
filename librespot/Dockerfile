@@ -16,6 +16,7 @@ ENV DEVICE_NAME=Snapcast \
     METADATA_PIPE=/tmp/librespot-metadata \
     WATCHDOG_INTERVAL=30 \
     WATCHDOG_FAILURES=4 \
+    WATCHDOG_CLOUD_CHECK=on \
     LIBRESPOT_EXTRA_ARGS=
 
 RUN apt update && apt upgrade -y \
@@ -34,6 +35,7 @@ RUN /usr/bin/librespot --version
 
 COPY start.sh /start.sh
 COPY onevent.sh /onevent.sh
+COPY probe.sh /probe.sh
 
 EXPOSE 39799
 
@@ -41,4 +43,4 @@ ENTRYPOINT ["dumb-init", "--"]
 CMD ["/start.sh"]
 
 HEALTHCHECK --interval=60s --timeout=10s --start-period=120s --retries=3 \
-    CMD curl --connect-timeout 5 --silent --show-error --fail "http://localhost:${ZEROCONF_PORT}/?action=getInfo" || exit 1
+    CMD /probe.sh || exit 1
