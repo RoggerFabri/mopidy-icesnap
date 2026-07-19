@@ -3,7 +3,7 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG raspotify_version=0.48.1
+ARG raspotify_version=0.48.2
 ARG target_arch=arm64
 
 ENV DEVICE_NAME=Snapcast \
