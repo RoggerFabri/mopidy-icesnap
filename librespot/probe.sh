@@ -15,11 +15,42 @@
 # marker file the first time such a connection is seen, so credential-less
 # deployments that idle without a session are not restart-looped.
 
+# Two failure classes, not one. curl's exit code says which:
+#
+#   7  connection refused  -- nothing is listening, librespot's zeroconf half is genuinely
+#                             gone. Instant and unambiguous, so believe it.
+#   22 HTTP error (--fail) -- it answered, badly. Also a real fault.
+#   52 empty reply         -- it accepted then gave nothing. Real fault.
+#   28 timed out           -- says as much about the host as about librespot. On a loaded Pi
+#                             this fires because the box is slow, not because anything broke.
+#
+# Collapsing all of these into one `exit 1` is what let a slow host look like a broken
+# service. Exit 1 is now a believed fault that start.sh acts on quickly; exit 2 is
+# inconclusive and has to persist far longer before it does (WATCHDOG_SOFT_FAILURES).
+# Unknown codes are treated as inconclusive on purpose -- the conservative side here is
+# fewer restarts, since a needless restart of a working service is the worse outcome.
+#
+# Docker's HEALTHCHECK marks the container unhealthy on either, which is right: it reports
+# without restarting anything.
+rc=0
 curl --connect-timeout 5 --max-time 8 --silent --fail \
-    "http://localhost:${ZEROCONF_PORT}/?action=getInfo" >/dev/null || {
-    echo "probe: zeroconf endpoint not answering"
-    exit 1
-}
+    "http://localhost:${ZEROCONF_PORT}/?action=getInfo" >/dev/null || rc=$?
+
+case "$rc" in
+    0) ;;
+    7 | 22 | 52 | 56)
+        echo "probe: zeroconf endpoint not answering (curl exit ${rc})"
+        exit 1
+        ;;
+    28)
+        echo "probe: zeroconf endpoint timed out (curl exit 28) -- host may just be slow"
+        exit 2
+        ;;
+    *)
+        echo "probe: zeroconf probe inconclusive (curl exit ${rc})"
+        exit 2
+        ;;
+esac
 
 [ "$WATCHDOG_CLOUD_CHECK" = "off" ] && exit 0
 
