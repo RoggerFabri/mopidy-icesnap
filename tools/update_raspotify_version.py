@@ -13,6 +13,9 @@ import urllib.error
 import urllib.request
 
 RE_VERSION = re.compile(r"^(ARG\s+raspotify_version=)(?P<version>[0-9]+\.[0-9]+\.[0-9]+)\s*$", re.MULTILINE)
+
+# A Dockerfile carrying this marker is held at its current version and skipped.
+RE_PIN = re.compile(r"^#\s*raspotify-pin\b", re.MULTILINE)
 GITHUB_API = "https://api.github.com/repos/dtcooper/raspotify/releases/latest"
 
 
@@ -101,6 +104,7 @@ def main() -> int:
     
     updated_files = []
     no_change_files = []
+    pinned_files = []
     
     for dockerfile in dockerfiles:
         try:
@@ -110,6 +114,10 @@ def main() -> int:
             continue
 
         current_version = read_current_version(contents)
+
+        if RE_PIN.search(contents):
+            pinned_files.append((dockerfile, current_version))
+            continue
 
         if desired_version == current_version:
             no_change_files.append((dockerfile, current_version))
@@ -133,6 +141,9 @@ def main() -> int:
     
     for dockerfile, current_version in no_change_files:
         print(f"  {dockerfile} already at {current_version}")
+
+    for dockerfile, current_version in pinned_files:
+        print(f"  {dockerfile} pinned at {current_version}, skipped")
 
     return 0
 
