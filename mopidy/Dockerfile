@@ -20,10 +20,12 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     python3-pip \
     sudo
 
+# Debian's python3-* packages (typing_extensions, idna, ...) have no RECORD file,
+# so pip cannot upgrade them for the Mopidy extensions: install pip's copies over them.
 RUN --mount=type=cache,target=/root/.cache/pip \
     mkdir -p ~/.config/pip \
  && printf "[global]\nbreak-system-packages = true\n" | tee ~/.config/pip/pip.conf \
- && pip install \
+ && pip install --ignore-installed \
     "Mopidy<4.0" \
     Mopidy-Iris \
     Mopidy-Local \
