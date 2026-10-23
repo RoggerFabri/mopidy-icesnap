@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt upgrade -y \
  && apt install -y \
+    ca-certificates \
     dumb-init \
     icecast2 \
     sudo \

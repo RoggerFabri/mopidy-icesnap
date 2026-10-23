@@ -12,6 +12,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt update \
  && apt install -y \
+    ca-certificates \
     curl \
     dumb-init \
     libshout3 \

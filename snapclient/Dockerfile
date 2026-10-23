@@ -11,6 +11,7 @@ ARG target_arch=arm64
 ARG dist=bookworm
 
 RUN apt update && apt upgrade -y \
+    ca-certificates \
     curl \
     dumb-init \
  && curl -sLO https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapclient_${snapcast_version}-1_${target_arch}_${dist}.deb \

@@ -32,6 +32,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
+          pull: true
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:snapserver"
           tags: |
             ${{ secrets.DOCKERHUB_SLUG }}/snapserver:arm64v8-latest

@@ -22,6 +22,7 @@ ENV DEVICE_NAME=Snapcast \
     LIBRESPOT_EXTRA_ARGS=
 
 RUN apt update && apt upgrade -y \
+    ca-certificates \
     curl \
     dumb-init \
     jq \

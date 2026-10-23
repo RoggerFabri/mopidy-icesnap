@@ -7,6 +7,7 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN apk update && apk upgrade \
  && apk add --no-cache \
+    ca-certificates \
     dumb-init \
     py3-pip \
     python3 \

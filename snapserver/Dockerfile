@@ -8,6 +8,7 @@ ARG target_arch=arm64
 ARG dist=bookworm
 
 RUN apt update && apt upgrade -y \
+    ca-certificates \
     curl \
     dumb-init \
     python3-minimal \
