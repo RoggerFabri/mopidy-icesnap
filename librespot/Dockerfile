@@ -3,8 +3,7 @@ LABEL Author="Rogger Fabri"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# raspotify-pin: last release before librespot 0.8.0, which aborts Connect transfers (librespot-org/librespot#1639). Remove this line to resume auto-bumps.
-ARG raspotify_version=0.47.1
+ARG raspotify_version=0.48.4
 ARG target_arch=arm64
 
 ENV DEVICE_NAME=Snapcast \
